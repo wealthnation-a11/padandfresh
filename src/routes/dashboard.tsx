@@ -4,6 +4,7 @@ import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { LiveDonationFeed } from "@/components/LiveDonationFeed";
 import { useMemo, useState } from "react";
 import { Trophy, Medal } from "lucide-react";
+import { formatNaira } from "@/lib/format";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -65,10 +66,10 @@ function Dashboard() {
         </div>
 
         <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <BigStat label="Total raised" value={stats.total} prefix="₦" tone="hero" />
           <BigStat label="Girls padded" value={stats.girls} suffix={` / ${goal}`} tone="girl" pct={(stats.girls / goal) * 100} />
           <BigStat label="Boys freshed" value={stats.boys} suffix={` / ${goal}`} tone="boy" pct={(stats.boys / goal) * 100} />
-          <BigStat label="Youth supported" value={stats.girls + stats.boys} tone="success" />
-          <BigStat label="Unique donors" value={stats.donors} tone="hero" />
+          <BigStat label="Unique donors" value={stats.donors} tone="success" />
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
@@ -121,7 +122,8 @@ function Dashboard() {
                     <th className="px-4 py-3">Rank</th>
                     <th className="px-4 py-3">Supporter</th>
                     <th className="px-4 py-3 text-right">Gifts</th>
-                    <th className="px-4 py-3 text-right">Youth supported</th>
+                    <th className="px-4 py-3 text-right">Youth</th>
+                    <th className="px-4 py-3 text-right">Amount</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -130,7 +132,8 @@ function Dashboard() {
                       <td className="px-4 py-3"><MedalCell rank={i + 1} /></td>
                       <td className="px-4 py-3 font-semibold">{row.name}</td>
                       <td className="px-4 py-3 text-right tabular-nums">{row.gifts}</td>
-                      <td className="px-4 py-3 text-right font-bold tabular-nums">{row.youth}</td>
+                      <td className="px-4 py-3 text-right tabular-nums">{row.youth}</td>
+                      <td className="px-4 py-3 text-right font-bold tabular-nums">{formatNaira(row.amount)}</td>
                     </tr>
                   ))}
                 </tbody>
