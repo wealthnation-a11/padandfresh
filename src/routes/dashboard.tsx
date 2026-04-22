@@ -26,16 +26,17 @@ function Dashboard() {
   const leaderboard = useMemo(() => {
     const cutoff = tab === "month" ? Date.now() - 30 * 24 * 60 * 60 * 1000 : 0;
     const filtered = donations.filter((d) => new Date(d.created_at).getTime() >= cutoff);
-    const map = new Map<string, { name: string; gifts: number; youth: number }>();
+    const map = new Map<string, { name: string; gifts: number; youth: number; amount: number }>();
     for (const d of filtered) {
       if (d.is_anonymous || !d.display_publicly) continue;
       const key = (d.donor_name ?? "Anonymous").toLowerCase();
-      const cur = map.get(key) ?? { name: d.donor_name ?? "Anonymous", gifts: 0, youth: 0 };
+      const cur = map.get(key) ?? { name: d.donor_name ?? "Anonymous", gifts: 0, youth: 0, amount: 0 };
       cur.gifts += 1;
       cur.youth += (d.girls_count ?? 0) + (d.boys_count ?? 0);
+      cur.amount += Number(d.amount) || 0;
       map.set(key, cur);
     }
-    return Array.from(map.values()).sort((a, b) => b.youth - a.youth || b.gifts - a.gifts).slice(0, 10);
+    return Array.from(map.values()).sort((a, b) => b.amount - a.amount || b.youth - a.youth).slice(0, 10);
   }, [donations, tab]);
 
   const breakdown = useMemo(() => {
