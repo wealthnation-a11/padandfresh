@@ -139,7 +139,7 @@ function ThankYou() {
         </div>
 
         <div className="mt-8 grid gap-3 sm:grid-cols-3">
-          <Link to="/donate" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-hero px-5 py-3 text-sm font-semibold text-white shadow-glow-girl">
+          <Link to="/donate" search={{ type: undefined }} className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-hero px-5 py-3 text-sm font-semibold text-white shadow-glow-girl">
             <Heart className="h-4 w-4" /> Donate Again
           </Link>
           <Link to="/donate" search={{ type: "pad_girl" }} className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-girl px-5 py-3 text-sm font-semibold text-girl">

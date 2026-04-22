@@ -4,6 +4,7 @@ import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { LiveDonationFeed } from "@/components/LiveDonationFeed";
 import { useMemo, useState } from "react";
 import { Trophy, Medal } from "lucide-react";
+import { formatNaira } from "@/lib/format";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -25,16 +26,17 @@ function Dashboard() {
   const leaderboard = useMemo(() => {
     const cutoff = tab === "month" ? Date.now() - 30 * 24 * 60 * 60 * 1000 : 0;
     const filtered = donations.filter((d) => new Date(d.created_at).getTime() >= cutoff);
-    const map = new Map<string, { name: string; gifts: number; youth: number }>();
+    const map = new Map<string, { name: string; gifts: number; youth: number; amount: number }>();
     for (const d of filtered) {
       if (d.is_anonymous || !d.display_publicly) continue;
       const key = (d.donor_name ?? "Anonymous").toLowerCase();
-      const cur = map.get(key) ?? { name: d.donor_name ?? "Anonymous", gifts: 0, youth: 0 };
+      const cur = map.get(key) ?? { name: d.donor_name ?? "Anonymous", gifts: 0, youth: 0, amount: 0 };
       cur.gifts += 1;
       cur.youth += (d.girls_count ?? 0) + (d.boys_count ?? 0);
+      cur.amount += Number(d.amount) || 0;
       map.set(key, cur);
     }
-    return Array.from(map.values()).sort((a, b) => b.youth - a.youth || b.gifts - a.gifts).slice(0, 10);
+    return Array.from(map.values()).sort((a, b) => b.amount - a.amount || b.youth - a.youth).slice(0, 10);
   }, [donations, tab]);
 
   const breakdown = useMemo(() => {
@@ -65,10 +67,10 @@ function Dashboard() {
         </div>
 
         <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <BigStat label="Total raised" value={stats.total} prefix="₦" tone="hero" />
           <BigStat label="Girls padded" value={stats.girls} suffix={` / ${goal}`} tone="girl" pct={(stats.girls / goal) * 100} />
           <BigStat label="Boys freshed" value={stats.boys} suffix={` / ${goal}`} tone="boy" pct={(stats.boys / goal) * 100} />
-          <BigStat label="Youth supported" value={stats.girls + stats.boys} tone="success" />
-          <BigStat label="Unique donors" value={stats.donors} tone="hero" />
+          <BigStat label="Unique donors" value={stats.donors} tone="success" />
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
@@ -121,7 +123,8 @@ function Dashboard() {
                     <th className="px-4 py-3">Rank</th>
                     <th className="px-4 py-3">Supporter</th>
                     <th className="px-4 py-3 text-right">Gifts</th>
-                    <th className="px-4 py-3 text-right">Youth supported</th>
+                    <th className="px-4 py-3 text-right">Youth</th>
+                    <th className="px-4 py-3 text-right">Amount</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -130,7 +133,8 @@ function Dashboard() {
                       <td className="px-4 py-3"><MedalCell rank={i + 1} /></td>
                       <td className="px-4 py-3 font-semibold">{row.name}</td>
                       <td className="px-4 py-3 text-right tabular-nums">{row.gifts}</td>
-                      <td className="px-4 py-3 text-right font-bold tabular-nums">{row.youth}</td>
+                      <td className="px-4 py-3 text-right tabular-nums">{row.youth}</td>
+                      <td className="px-4 py-3 text-right font-bold tabular-nums">{formatNaira(row.amount)}</td>
                     </tr>
                   ))}
                 </tbody>
