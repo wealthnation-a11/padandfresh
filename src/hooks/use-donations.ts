@@ -72,8 +72,11 @@ export function useDonations(limit = 20) {
 
   useEffect(() => {
     refresh();
+    // Use a unique channel name per mount to avoid "cannot add postgres_changes
+    // callbacks" errors when StrictMode double-mounts or the hook re-subscribes.
+    const channelName = `donations-live-${Math.random().toString(36).slice(2)}`;
     const channel = supabase
-      .channel("donations-live")
+      .channel(channelName)
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "donations" },
