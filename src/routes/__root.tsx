@@ -39,6 +39,13 @@ export const Route = createRootRoute({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@PadAndFresh" },
+      { property: "og:title", content: "PadAndFresh.ng — Keep them in school. Keep them confident." },
+      { name: "twitter:title", content: "PadAndFresh.ng — Keep them in school. Keep them confident." },
+      { name: "description", content: "A donation website supporting Nigerian youth with sanitary pads and hygiene products, featuring real-time tracking." },
+      { property: "og:description", content: "A donation website supporting Nigerian youth with sanitary pads and hygiene products, featuring real-time tracking." },
+      { name: "twitter:description", content: "A donation website supporting Nigerian youth with sanitary pads and hygiene products, featuring real-time tracking." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/758e0d34-3757-46a8-a251-77987898d0b6/id-preview-18e79e4b--3bdcc6fb-f0bd-4b6c-9f28-5e145cbf2c94.lovable.app-1776855103436.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/758e0d34-3757-46a8-a251-77987898d0b6/id-preview-18e79e4b--3bdcc6fb-f0bd-4b6c-9f28-5e145cbf2c94.lovable.app-1776855103436.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
