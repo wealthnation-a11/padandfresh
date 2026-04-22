@@ -73,13 +73,38 @@ function ThankYou() {
         </div>
 
         <div className="mt-10 rounded-3xl border border-border bg-card p-6 shadow-soft sm:p-8">
-          <h2 className="text-lg font-bold">Donation Summary</h2>
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-lg font-bold">Donation Summary</h2>
+            <span className="rounded-full bg-success/10 px-3 py-1 text-xs font-semibold text-success">Paid</span>
+          </div>
           <dl className="mt-4 grid gap-3 sm:grid-cols-2">
             <Row label="Reference" value={ref ?? "—"} />
             <Row label="Amount" value={amount ? formatNaira(amount) : "—"} />
             <Row label="Program" value={prettyType(type)} />
             <Row label="Date" value={new Date().toLocaleString("en-NG")} />
           </dl>
+
+          <div className="mt-5 flex flex-col gap-2 sm:flex-row">
+            <button
+              type="button"
+              onClick={handleDownload}
+              disabled={!canDownload}
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-hero px-5 py-3 text-sm font-semibold text-white shadow-glow-girl transition-opacity disabled:opacity-50"
+            >
+              <Download className="h-4 w-4" /> Download receipt (PDF)
+            </button>
+            <button
+              type="button"
+              onClick={handleEmail}
+              disabled={!canDownload}
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border-2 border-girl px-5 py-3 text-sm font-semibold text-girl transition-opacity disabled:opacity-50"
+            >
+              <Mail className="h-4 w-4" /> Email me a copy
+            </button>
+          </div>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Your receipt includes the Paystack reference, amount, program, and impact details.
+          </p>
         </div>
 
         <div className="mt-8 rounded-3xl border border-border bg-card p-6 shadow-soft sm:p-8">
