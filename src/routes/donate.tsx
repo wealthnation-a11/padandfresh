@@ -9,10 +9,10 @@ import { toast } from "sonner";
 
 const SearchSchema = z.object({
   type: z.string().optional().transform((v) => (v === "pad_girl" || v === "fresh_boy" || v === "both" ? v : undefined)),
-}).optional().default({});
+});
 
 export const Route = createFileRoute("/donate")({
-  validateSearch: (s) => SearchSchema.parse(s ?? {}),
+  validateSearch: (s) => SearchSchema.parse(s),
   head: () => ({
     meta: [
       { title: "Donate — PadAndFresh.ng" },
