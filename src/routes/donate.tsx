@@ -107,7 +107,16 @@ function DonatePage() {
       return;
     }
     toast.success("Donation confirmed! 💜");
-    navigate({ to: "/thank-you", search: { ref, amount, type: plan } });
+    navigate({
+      to: "/thank-you",
+      search: {
+        ref,
+        amount,
+        type: plan,
+        ...(anonymous ? {} : { name: name.trim() || undefined }),
+        ...(email.trim() ? { email: email.trim() } : {}),
+      },
+    });
   }
 
   return (
