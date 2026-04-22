@@ -14,7 +14,141 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          phone: string | null
+          subject: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          phone?: string | null
+          subject: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          phone?: string | null
+          subject?: string
+        }
+        Relationships: []
+      }
+      donations: {
+        Row: {
+          amount: number
+          boys_count: number
+          created_at: string
+          display_publicly: boolean
+          donation_type: string
+          donor_name: string | null
+          email: string | null
+          girls_count: number
+          id: string
+          is_anonymous: boolean
+          is_recurring: boolean
+          payment_reference: string
+          payment_status: string
+          phone: string | null
+          receive_updates: boolean
+        }
+        Insert: {
+          amount: number
+          boys_count?: number
+          created_at?: string
+          display_publicly?: boolean
+          donation_type: string
+          donor_name?: string | null
+          email?: string | null
+          girls_count?: number
+          id?: string
+          is_anonymous?: boolean
+          is_recurring?: boolean
+          payment_reference: string
+          payment_status?: string
+          phone?: string | null
+          receive_updates?: boolean
+        }
+        Update: {
+          amount?: number
+          boys_count?: number
+          created_at?: string
+          display_publicly?: boolean
+          donation_type?: string
+          donor_name?: string | null
+          email?: string | null
+          girls_count?: number
+          id?: string
+          is_anonymous?: boolean
+          is_recurring?: boolean
+          payment_reference?: string
+          payment_status?: string
+          phone?: string | null
+          receive_updates?: boolean
+        }
+        Relationships: []
+      }
+      newsletter_subscribers: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      volunteers: {
+        Row: {
+          availability: string | null
+          created_at: string
+          email: string
+          id: string
+          interest_area: string
+          message: string | null
+          name: string
+          phone: string | null
+        }
+        Insert: {
+          availability?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          interest_area: string
+          message?: string | null
+          name: string
+          phone?: string | null
+        }
+        Update: {
+          availability?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          interest_area?: string
+          message?: string | null
+          name?: string
+          phone?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
