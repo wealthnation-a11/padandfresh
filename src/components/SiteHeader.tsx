@@ -38,7 +38,7 @@ export function SiteHeader() {
           ))}
           <Link
             to="/donate"
-            search={{}}
+            search={{ type: undefined }}
             className="ml-3 inline-flex items-center justify-center rounded-full bg-gradient-hero px-5 py-2 text-sm font-semibold text-white shadow-glow-girl transition-transform hover:scale-105"
           >
             Donate Now
@@ -76,7 +76,7 @@ export function SiteHeader() {
           ))}
           <Link
             to="/donate"
-            search={{}}
+            search={{ type: undefined }}
             onClick={() => setOpen(false)}
             className="mt-2 inline-flex items-center justify-center rounded-full bg-gradient-hero px-5 py-3 text-base font-semibold text-white shadow-glow-girl"
           >

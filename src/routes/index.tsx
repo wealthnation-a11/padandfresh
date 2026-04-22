@@ -189,7 +189,7 @@ function Home() {
           </p>
           <Link
             to="/donate"
-            search={{}}
+            search={{ type: undefined }}
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-base font-bold text-girl shadow-soft transition-transform hover:-translate-y-0.5"
           >
             Donate Now <ArrowRight className="h-4 w-4" />

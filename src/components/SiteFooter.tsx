@@ -46,7 +46,7 @@ export function SiteFooter() {
             <li><Link to="/" className="hover:text-foreground">Home</Link></li>
             <li><Link to="/about" className="hover:text-foreground">About</Link></li>
             <li><Link to="/dashboard" className="hover:text-foreground">Live Impact</Link></li>
-            <li><Link to="/donate" search={{}} className="hover:text-foreground">Donate</Link></li>
+            <li><Link to="/donate" search={{ type: undefined }} className="hover:text-foreground">Donate</Link></li>
             <li><Link to="/contact" className="hover:text-foreground">Contact</Link></li>
           </ul>
         </div>
