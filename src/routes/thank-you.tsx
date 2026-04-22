@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { z } from "zod";
-import { Check, Facebook, Twitter, Linkedin, MessageCircle, Repeat, Home, Heart } from "lucide-react";
+import { Check, Facebook, Twitter, Linkedin, MessageCircle, Repeat, Home, Heart, Download, Mail } from "lucide-react";
 import { formatNaira } from "@/lib/format";
+import { downloadReceiptPDF, buildReceiptMailto, type ReceiptData } from "@/lib/receipt";
+import { toast } from "sonner";
 
 const SearchSchema = z.object({
   ref: z.string().optional(),
