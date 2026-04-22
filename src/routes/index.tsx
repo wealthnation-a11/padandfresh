@@ -12,12 +12,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "₦700. Two ways to change a Nigerian youth's life. Pad a Girl. Fresh Boy. Real-time impact tracking, transparent donations.",
+          "Give freely. Two ways to change a Nigerian youth's life — Pad a Girl or Fresh Boy. Real-time impact tracking, transparent donations.",
       },
       { property: "og:title", content: "PadAndFresh.ng — Keep them in school. Keep them confident." },
       {
         property: "og:description",
-        content: "₦700. Two ways to change a Nigerian youth's life. 1,000 Kaduna youth. Real impact, tracked live.",
+        content: "Give what you can. Change a Nigerian youth's life. Real impact, tracked live.",
       },
     ],
   }),
@@ -58,7 +58,7 @@ function Home() {
               </span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-white/85 sm:text-xl">
-              ₦700. Two ways to change a Nigerian youth's life.
+              Give what you can. Change a Nigerian youth's life today.
             </p>
 
             <div className="mt-10 flex flex-col items-stretch justify-center gap-3 sm:flex-row">
@@ -67,7 +67,7 @@ function Home() {
                 search={{ type: "pad_girl" }}
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-girl px-7 py-4 text-base font-bold text-white shadow-glow-girl transition-transform hover:-translate-y-0.5 animate-float"
               >
-                💜 Pad a Girl — ₦700
+                💜 Pad a Girl
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
@@ -76,22 +76,19 @@ function Home() {
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-boy px-7 py-4 text-base font-bold text-white shadow-glow-boy transition-transform hover:-translate-y-0.5 animate-float"
                 style={{ animationDelay: "0.2s" }}
               >
-                💙 Fresh Boy — ₦700
+                💙 Fresh Boy
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
           </div>
 
-          {/* Live counters */}
-          <div className="mx-auto mt-16 grid max-w-5xl grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-            <CounterCard label="Total raised" value={stats.total} prefix="₦" />
+          <div className="mx-auto mt-16 grid max-w-5xl grid-cols-2 gap-3 sm:grid-cols-4">
             <CounterCard label="Girls padded" value={stats.girls} suffix={` / ${goal}`} />
             <CounterCard label="Boys freshed" value={stats.boys} suffix={` / ${goal}`} />
             <CounterCard label="Youth supported" value={stats.girls + stats.boys} />
             <CounterCard label="Donors this month" value={stats.donorsThisMonth} />
           </div>
 
-          {/* progress bars */}
           <div className="mx-auto mt-8 grid max-w-5xl gap-4 sm:grid-cols-2">
             <ProgressBar label="Pad a Girl progress" pct={girlsPct} colorClass="bg-girl" />
             <ProgressBar label="Fresh Boy progress" pct={boysPct} colorClass="bg-boy" />
@@ -99,7 +96,6 @@ function Home() {
         </div>
       </section>
 
-      {/* LIVE FEED */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
           <div>
@@ -126,7 +122,6 @@ function Home() {
         </div>
       </section>
 
-      {/* MISSION */}
       <section className="bg-gradient-soft">
         <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6">
           <h2 className="text-3xl font-bold sm:text-4xl">Our Mission</h2>
@@ -139,8 +134,8 @@ function Home() {
               We're changing that — one child at a time.
             </p>
             <ul className="mx-auto inline-flex flex-col gap-2 text-left text-base">
-              <li>• Quality sanitary pads + health education for girls (₦700)</li>
-              <li>• Roll-on deodorant + cologne + hygiene education for boys (₦700)</li>
+              <li>• Quality sanitary pads + health education for girls</li>
+              <li>• Roll-on deodorant + cologne + hygiene education for boys</li>
               <li>• Building dignity, confidence, and futures</li>
             </ul>
             <p className="text-base">
@@ -150,56 +145,17 @@ function Home() {
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
         <h2 className="text-center text-3xl font-bold sm:text-4xl">How It Works</h2>
-        <p className="mt-3 text-center text-muted-foreground">Pick your impact. Pay securely. Watch lives change.</p>
+        <p className="mt-3 text-center text-muted-foreground">Pick your impact. Give freely. Watch lives change.</p>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          <ImpactCard
-            tone="girl"
-            emoji="💜"
-            title="PAD A GIRL"
-            price="₦700"
-            items={[
-              "Pack of Softcare sanitary pads",
-              "Reproductive health education session",
-              "Keeps her in school all month long",
-            ]}
-            cta="Pad a Girl"
-            type="pad_girl"
-          />
-          <ImpactCard
-            tone="boy"
-            emoji="💙"
-            title="FRESH BOY"
-            price="₦700"
-            items={[
-              "Quality roll-on deodorant",
-              "Age-appropriate cologne / perfume",
-              "Hygiene education workshop",
-              "Builds confidence and prevents bullying",
-            ]}
-            cta="Fresh Boy"
-            type="fresh_boy"
-          />
-          <ImpactCard
-            tone="success"
-            emoji="💚"
-            title="SUPPORT BOTH"
-            price="₦1,400"
-            items={[
-              "Transform two lives at once",
-              "Complete gender inclusion",
-              "Maximize your impact",
-            ]}
-            cta="Support Both"
-            type="both"
-          />
+          <ImpactCard tone="girl" emoji="💜" title="PAD A GIRL" items={["Pack of Softcare sanitary pads","Reproductive health education session","Keeps her in school all month long"]} cta="Pad a Girl" type="pad_girl" />
+          <ImpactCard tone="boy" emoji="💙" title="FRESH BOY" items={["Quality roll-on deodorant","Age-appropriate cologne / perfume","Hygiene education workshop","Builds confidence and prevents bullying"]} cta="Fresh Boy" type="fresh_boy" />
+          <ImpactCard tone="success" emoji="💚" title="SUPPORT BOTH" items={["Transform two lives at once","Complete gender inclusion","Maximize your impact"]} cta="Support Both" type="both" />
         </div>
       </section>
 
-      {/* WHY THIS MATTERS */}
       <section className="bg-gradient-soft">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <h2 className="text-center text-3xl font-bold sm:text-4xl">Why This Matters</h2>
@@ -208,13 +164,12 @@ function Home() {
             <StatCard icon={<TrendingDown className="h-5 w-5" />} text="1 in 10 girls drops out due to period poverty" />
             <StatCard icon={<Frown className="h-5 w-5" />} text="Boys with poor hygiene face daily bullying" />
             <StatCard icon={<DoorClosed className="h-5 w-5" />} text="Lack of basic hygiene products keeps kids isolated" />
-            <StatCard icon={<Lightbulb className="h-5 w-5" />} text="Your ₦700 removes these barriers entirely" highlight />
+            <StatCard icon={<Lightbulb className="h-5 w-5" />} text="Your gift removes these barriers entirely" highlight />
             <StatCard icon={<Shield className="h-5 w-5" />} text="100% of donations tracked publicly and transparently" />
           </div>
         </div>
       </section>
 
-      {/* PARTNERS */}
       <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
         <h3 className="text-center text-sm font-semibold uppercase tracking-wider text-muted-foreground">
           In Partnership With
@@ -225,11 +180,10 @@ function Home() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
       <section className="mx-auto max-w-5xl px-4 pb-20 sm:px-6">
         <div className="overflow-hidden rounded-3xl bg-gradient-hero p-10 text-center text-white shadow-soft sm:p-14">
           <Heart className="mx-auto h-10 w-10 animate-pulse-glow" />
-          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Your ₦700 starts now.</h2>
+          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Your gift starts now.</h2>
           <p className="mx-auto mt-3 max-w-xl text-white/90">
             One donation. One child. A whole future changed.
           </p>
@@ -245,17 +199,7 @@ function Home() {
   );
 }
 
-function CounterCard({
-  label,
-  value,
-  prefix,
-  suffix,
-}: {
-  label: string;
-  value: number;
-  prefix?: string;
-  suffix?: string;
-}) {
+function CounterCard({ label, value, prefix, suffix }: { label: string; value: number; prefix?: string; suffix?: string }) {
   return (
     <div className="rounded-2xl border border-white/20 bg-white/10 p-4 text-center backdrop-blur-md">
       <div className="text-2xl font-extrabold tabular-nums sm:text-3xl">
@@ -274,54 +218,29 @@ function ProgressBar({ label, pct, colorClass }: { label: string; pct: number; c
         <span>{pct.toFixed(1)}%</span>
       </div>
       <div className="h-2.5 overflow-hidden rounded-full bg-white/20">
-        <div
-          className={`h-full rounded-full ${colorClass} transition-all duration-1000`}
-          style={{ width: `${pct}%` }}
-        />
+        <div className={`h-full rounded-full ${colorClass} transition-all duration-1000`} style={{ width: `${pct}%` }} />
       </div>
     </div>
   );
 }
 
-function ImpactCard({
-  tone,
-  emoji,
-  title,
-  price,
-  items,
-  cta,
-  type,
-}: {
-  tone: "girl" | "boy" | "success";
-  emoji: string;
-  title: string;
-  price: string;
-  items: string[];
-  cta: string;
-  type: "pad_girl" | "fresh_boy" | "both" | "custom" | "sponsor_10";
-}) {
+function ImpactCard({ tone, emoji, title, items, cta, type }: { tone: "girl" | "boy" | "success"; emoji: string; title: string; items: string[]; cta: string; type: "pad_girl" | "fresh_boy" | "both" }) {
   const bg = tone === "girl" ? "bg-gradient-girl" : tone === "boy" ? "bg-gradient-boy" : "bg-gradient-both";
   const ring = tone === "girl" ? "shadow-glow-girl" : tone === "boy" ? "shadow-glow-boy" : "shadow-soft";
   return (
     <div className={`group relative overflow-hidden rounded-3xl ${bg} p-8 text-white ${ring} transition-transform hover:-translate-y-1`}>
       <div className="text-4xl">{emoji}</div>
       <h3 className="mt-3 text-2xl font-extrabold tracking-tight">{title}</h3>
-      <p className="mt-1 text-3xl font-extrabold">{price}</p>
+      <p className="mt-1 text-sm font-semibold uppercase tracking-wider text-white/80">Give freely</p>
       <ul className="mt-6 space-y-2 text-sm text-white/95">
         {items.map((it) => (
           <li key={it} className="flex items-start gap-2">
-            <span className="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-white/20 text-[10px]">
-              ✓
-            </span>
+            <span className="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-white/20 text-[10px]">✓</span>
             <span>{it}</span>
           </li>
         ))}
       </ul>
-      <Link
-        to="/donate"
-        search={{ type }}
-        className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-foreground transition-transform group-hover:scale-[1.02]"
-      >
+      <Link to="/donate" search={{ type }} className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold text-foreground transition-transform group-hover:scale-[1.02]">
         {cta} <ArrowRight className="h-4 w-4" />
       </Link>
     </div>
@@ -330,12 +249,7 @@ function ImpactCard({
 
 function StatCard({ icon, text, highlight }: { icon: React.ReactNode; text: string; highlight?: boolean }) {
   return (
-    <div
-      className={
-        "flex items-start gap-3 rounded-2xl border p-5 shadow-sm transition-all hover:-translate-y-0.5 " +
-        (highlight ? "border-girl bg-girl text-white" : "border-border bg-card")
-      }
-    >
+    <div className={"flex items-start gap-3 rounded-2xl border p-5 shadow-sm transition-all hover:-translate-y-0.5 " + (highlight ? "border-girl bg-girl text-white" : "border-border bg-card")}>
       <span className={"grid h-9 w-9 shrink-0 place-items-center rounded-full " + (highlight ? "bg-white/20 text-white" : "bg-accent text-girl")}>
         {icon}
       </span>

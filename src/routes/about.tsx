@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ShieldCheck, Heart, Quote } from "lucide-react";
 import { useDonations } from "@/hooks/use-donations";
-import { formatNaira } from "@/lib/format";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -40,7 +39,8 @@ function About() {
           </p>
           <p>
             We chose two of the most-cited, most-overlooked barriers Kaduna youth face every month:
-            period poverty for girls, and hygiene-related bullying for boys. ₦700 solves each.
+            period poverty for girls, and hygiene-related bullying for boys. Every freewill gift —
+            no matter the size — moves a child closer to dignity.
           </p>
         </div>
       </section>
@@ -48,13 +48,13 @@ function About() {
       {/* Programs */}
       <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         <div className="grid gap-6 md:grid-cols-2">
-          <ProgramCard tone="girl" emoji="💜" title="Pad a Girl Program" price="₦700 per girl" body="Period poverty forces thousands of Nigerian girls to miss school monthly. Our program provides:" items={[
+          <ProgramCard tone="girl" emoji="💜" title="Pad a Girl Program" body="Period poverty forces thousands of Nigerian girls to miss school monthly. Our program provides:" items={[
             "Quality Softcare sanitary pads (one month supply)",
             "Reproductive health education workshop",
             "Understanding their bodies and menstrual health",
             "Dignity and confidence to stay in school",
           ]} />
-          <ProgramCard tone="boy" emoji="💙" title="Fresh Boy Program" price="₦700 per boy" body="Puberty brings challenges for boys we rarely discuss. Body odor and poor hygiene lead to bullying and isolation. Our program provides:" items={[
+          <ProgramCard tone="boy" emoji="💙" title="Fresh Boy Program" body="Puberty brings challenges for boys we rarely discuss. Body odor and poor hygiene lead to bullying and isolation. Our program provides:" items={[
             "Quality roll-on deodorant (prevents body odor)",
             "Age-appropriate cologne / perfume (builds confidence)",
             "Hygiene education workshop (teaches proper grooming)",
@@ -74,13 +74,13 @@ function About() {
               crush a young boy's confidence and lead to school avoidance.
             </p>
             <p>
-              Many families in Kaduna cannot afford the ₦700 for a roll-on deodorant and cologne.
-              Boys suffer in silence, face daily humiliation, and begin to isolate themselves.
+              Many families in Kaduna simply cannot afford a roll-on deodorant or cologne. Boys
+              suffer in silence, face daily humiliation, and begin to isolate themselves.
             </p>
             <p>
               The Fresh Boy Program addresses this by providing quality hygiene products and
-              education. For ₦700, we give a boy the tools to walk into school with his head high,
-              free from bullying, ready to learn and thrive.
+              education — giving each boy the tools to walk into school with his head high, free
+              from bullying, ready to learn and thrive.
             </p>
             <p className="font-semibold text-foreground">
               Because dignity isn't just for girls. Every child deserves to feel confident and valued.
@@ -94,9 +94,9 @@ function About() {
         <h2 className="text-center text-2xl font-bold sm:text-3xl">Our impact, live</h2>
         <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <ImpactStat label="Youth supported" value={(stats.girls + stats.boys).toLocaleString()} />
-          <ImpactStat label="Total raised" value={formatNaira(stats.total)} />
+          <ImpactStat label="Girls padded" value={stats.girls.toLocaleString()} />
+          <ImpactStat label="Boys freshed" value={stats.boys.toLocaleString()} />
           <ImpactStat label="Donors" value={stats.donors.toLocaleString()} />
-          <ImpactStat label="States covered" value="1 → expanding" />
         </div>
       </section>
 
@@ -132,8 +132,8 @@ function About() {
             <h2 className="text-2xl font-bold">Radical transparency</h2>
           </div>
           <p className="mt-3 text-muted-foreground">
-            Every donation is tracked publicly. Every distribution is documented with photos. Every
-            naira is accounted for. View our <Link to="/dashboard" className="font-semibold text-girl hover:underline">live impact dashboard</Link> any time.
+            Every donation is tracked publicly. Every distribution is documented with photos. View
+            our <Link to="/dashboard" className="font-semibold text-girl hover:underline">live impact dashboard</Link> any time.
           </p>
         </div>
       </section>
@@ -147,7 +147,7 @@ function About() {
             to="/donate"
             className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-base font-bold text-girl shadow-soft"
           >
-            Donate ₦700 now <ArrowRight className="h-4 w-4" />
+            Donate now <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
@@ -155,13 +155,12 @@ function About() {
   );
 }
 
-function ProgramCard({ tone, emoji, title, price, body, items }: { tone: "girl" | "boy"; emoji: string; title: string; price: string; body: string; items: string[] }) {
+function ProgramCard({ tone, emoji, title, body, items }: { tone: "girl" | "boy"; emoji: string; title: string; body: string; items: string[] }) {
   const bg = tone === "girl" ? "bg-gradient-girl" : "bg-gradient-boy";
   return (
     <div className={`rounded-3xl ${bg} p-7 text-white shadow-soft`}>
       <div className="text-3xl">{emoji}</div>
       <h3 className="mt-2 text-2xl font-extrabold">{title}</h3>
-      <p className="mt-1 text-sm font-semibold text-white/90">{price}</p>
       <p className="mt-4 text-sm text-white/95">{body}</p>
       <ul className="mt-4 space-y-2 text-sm">
         {items.map((it) => (

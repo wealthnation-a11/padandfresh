@@ -3,16 +3,15 @@ import { useDonations } from "@/hooks/use-donations";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { LiveDonationFeed } from "@/components/LiveDonationFeed";
 import { useMemo, useState } from "react";
-import { formatNaira } from "@/lib/format";
 import { Trophy, Medal } from "lucide-react";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
       { title: "Live Impact Dashboard — PadAndFresh.ng" },
-      { name: "description", content: "Track every donation live. Total raised, girls padded, boys freshed, and our top donors — updated in real time." },
+      { name: "description", content: "Track every donation live. Girls padded, boys freshed, and our top supporters — updated in real time." },
       { property: "og:title", content: "Live Impact Dashboard — PadAndFresh.ng" },
-      { property: "og:description", content: "Total raised, girls padded, boys freshed — updated in real time." },
+      { property: "og:description", content: "Girls padded, boys freshed — updated in real time." },
     ],
   }),
   component: Dashboard,
@@ -26,28 +25,27 @@ function Dashboard() {
   const leaderboard = useMemo(() => {
     const cutoff = tab === "month" ? Date.now() - 30 * 24 * 60 * 60 * 1000 : 0;
     const filtered = donations.filter((d) => new Date(d.created_at).getTime() >= cutoff);
-    const map = new Map<string, { name: string; amount: number; youth: number }>();
+    const map = new Map<string, { name: string; gifts: number; youth: number }>();
     for (const d of filtered) {
       if (d.is_anonymous || !d.display_publicly) continue;
       const key = (d.donor_name ?? "Anonymous").toLowerCase();
-      const cur = map.get(key) ?? { name: d.donor_name ?? "Anonymous", amount: 0, youth: 0 };
-      cur.amount += Number(d.amount);
+      const cur = map.get(key) ?? { name: d.donor_name ?? "Anonymous", gifts: 0, youth: 0 };
+      cur.gifts += 1;
       cur.youth += (d.girls_count ?? 0) + (d.boys_count ?? 0);
       map.set(key, cur);
     }
-    return Array.from(map.values()).sort((a, b) => b.amount - a.amount).slice(0, 10);
+    return Array.from(map.values()).sort((a, b) => b.youth - a.youth || b.gifts - a.gifts).slice(0, 10);
   }, [donations, tab]);
 
-  // Donation type breakdown
   const breakdown = useMemo(() => {
-    const out = { pad_girl: 0, fresh_boy: 0, both: 0, other: 0 };
+    const out = { pad_girl: 0, fresh_boy: 0, both: 0 };
     for (const d of donations) {
-      if (d.donation_type === "pad_girl") out.pad_girl += Number(d.amount);
-      else if (d.donation_type === "fresh_boy") out.fresh_boy += Number(d.amount);
-      else if (d.donation_type === "both") out.both += Number(d.amount);
-      else out.other += Number(d.amount);
+      const youth = (d.girls_count ?? 0) + (d.boys_count ?? 0);
+      if (d.donation_type === "pad_girl") out.pad_girl += youth;
+      else if (d.donation_type === "fresh_boy") out.fresh_boy += youth;
+      else out.both += youth;
     }
-    const total = out.pad_girl + out.fresh_boy + out.both + out.other || 1;
+    const total = out.pad_girl + out.fresh_boy + out.both || 1;
     return { ...out, total };
   }, [donations]);
 
@@ -63,35 +61,27 @@ function Dashboard() {
             LIVE
           </span>
           <h1 className="mt-3 text-3xl font-bold sm:text-5xl">Impact Dashboard</h1>
-          <p className="mt-2 text-muted-foreground">Every number is live. Every naira is tracked.</p>
+          <p className="mt-2 text-muted-foreground">Every number is live. Every life is tracked.</p>
         </div>
 
-        {/* Top stats */}
-        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-          <BigStat label="Total raised" value={stats.total} prefix="₦" tone="hero" />
+        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <BigStat label="Girls padded" value={stats.girls} suffix={` / ${goal}`} tone="girl" pct={(stats.girls / goal) * 100} />
           <BigStat label="Boys freshed" value={stats.boys} suffix={` / ${goal}`} tone="boy" pct={(stats.boys / goal) * 100} />
           <BigStat label="Youth supported" value={stats.girls + stats.boys} tone="success" />
           <BigStat label="Unique donors" value={stats.donors} tone="hero" />
         </div>
 
-        {/* Charts row */}
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
-          {/* Donation breakdown */}
           <div className="rounded-3xl border border-border bg-card p-6 shadow-soft">
-            <h3 className="text-lg font-bold">Donation Breakdown</h3>
-            <p className="text-sm text-muted-foreground">By program</p>
+            <h3 className="text-lg font-bold">Youth supported by program</h3>
+            <p className="text-sm text-muted-foreground">Where every gift goes</p>
             <div className="mt-6 space-y-4">
               <BreakdownBar label="Pad a Girl" value={breakdown.pad_girl} total={breakdown.total} colorClass="bg-gradient-girl" />
               <BreakdownBar label="Fresh Boy" value={breakdown.fresh_boy} total={breakdown.total} colorClass="bg-gradient-boy" />
               <BreakdownBar label="Support Both" value={breakdown.both} total={breakdown.total} colorClass="bg-gradient-both" />
-              {breakdown.other > 0 && (
-                <BreakdownBar label="Custom / Sponsor" value={breakdown.other} total={breakdown.total} colorClass="bg-gradient-hero" />
-              )}
             </div>
           </div>
 
-          {/* Live feed */}
           <div className="rounded-3xl border border-border bg-card p-6 shadow-soft">
             <h3 className="text-lg font-bold">Live Donation Feed</h3>
             <p className="text-sm text-muted-foreground">Updates in real time</p>
@@ -101,11 +91,10 @@ function Dashboard() {
           </div>
         </div>
 
-        {/* Leaderboard */}
         <div className="mt-10 rounded-3xl border border-border bg-card p-6 shadow-soft">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h3 className="text-lg font-bold flex items-center gap-2"><Trophy className="h-5 w-5 text-girl" /> Top Donors</h3>
+              <h3 className="text-lg font-bold flex items-center gap-2"><Trophy className="h-5 w-5 text-girl" /> Top Supporters</h3>
               <p className="text-sm text-muted-foreground">The people making this happen</p>
             </div>
             <div className="inline-flex rounded-full border border-border bg-background p-1">
@@ -113,11 +102,7 @@ function Dashboard() {
                 { id: "month" as const, label: "This Month" },
                 { id: "all" as const, label: "All Time" },
               ].map((t) => (
-                <button
-                  key={t.id}
-                  onClick={() => setTab(t.id)}
-                  className={"rounded-full px-4 py-1.5 text-sm font-semibold transition-colors " + (tab === t.id ? "bg-gradient-hero text-white shadow-glow-girl" : "text-muted-foreground hover:text-foreground")}
-                >
+                <button key={t.id} onClick={() => setTab(t.id)} className={"rounded-full px-4 py-1.5 text-sm font-semibold transition-colors " + (tab === t.id ? "bg-gradient-hero text-white shadow-glow-girl" : "text-muted-foreground hover:text-foreground")}>
                   {t.label}
                 </button>
               ))}
@@ -127,16 +112,16 @@ function Dashboard() {
           <div className="mt-6 overflow-x-auto">
             {leaderboard.length === 0 ? (
               <div className="rounded-2xl border border-dashed border-border p-8 text-center text-sm text-muted-foreground">
-                No public donors yet. Be the first! 💜
+                No public supporters yet. Be the first! 💜
               </div>
             ) : (
               <table className="w-full">
                 <thead>
                   <tr className="text-left text-xs uppercase tracking-wider text-muted-foreground">
                     <th className="px-4 py-3">Rank</th>
-                    <th className="px-4 py-3">Donor</th>
-                    <th className="px-4 py-3 text-right">Amount</th>
-                    <th className="px-4 py-3 text-right">Youth</th>
+                    <th className="px-4 py-3">Supporter</th>
+                    <th className="px-4 py-3 text-right">Gifts</th>
+                    <th className="px-4 py-3 text-right">Youth supported</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -144,8 +129,8 @@ function Dashboard() {
                     <tr key={row.name + i} className="border-t border-border">
                       <td className="px-4 py-3"><MedalCell rank={i + 1} /></td>
                       <td className="px-4 py-3 font-semibold">{row.name}</td>
-                      <td className="px-4 py-3 text-right font-bold tabular-nums">{formatNaira(row.amount)}</td>
-                      <td className="px-4 py-3 text-right tabular-nums">{row.youth}</td>
+                      <td className="px-4 py-3 text-right tabular-nums">{row.gifts}</td>
+                      <td className="px-4 py-3 text-right font-bold tabular-nums">{row.youth}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -181,7 +166,7 @@ function BreakdownBar({ label, value, total, colorClass }: { label: string; valu
     <div>
       <div className="mb-1 flex items-center justify-between text-sm">
         <span className="font-semibold">{label}</span>
-        <span className="tabular-nums text-muted-foreground">{formatNaira(value)} · {pct.toFixed(0)}%</span>
+        <span className="tabular-nums text-muted-foreground">{value} youth · {pct.toFixed(0)}%</span>
       </div>
       <div className="h-3 overflow-hidden rounded-full bg-muted">
         <div className={`h-full rounded-full ${colorClass} transition-all duration-700`} style={{ width: `${pct}%` }} />
