@@ -145,6 +145,7 @@ function About() {
           <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Be part of the story.</h2>
           <Link
             to="/donate"
+            search={{}}
             className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-base font-bold text-girl shadow-soft"
           >
             Donate now <ArrowRight className="h-4 w-4" />
