@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart } from "lucide-react";
 import { useDonations, type DonationRow } from "@/hooks/use-donations";
-import { donationLabel, formatNaira, timeAgo } from "@/lib/format";
+import { donationLabel, timeAgo } from "@/lib/format";
 
 function displayName(d: DonationRow): string {
   if (d.is_anonymous) return "Anonymous";
@@ -48,8 +48,7 @@ export function LiveDonationFeed({ limit = 10 }: { limit?: number }) {
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm">
                 <span className="font-semibold">{displayName(d)}</span>{" "}
-                <span className="text-muted-foreground">donated</span>{" "}
-                <span className="font-semibold">{formatNaira(Number(d.amount))}</span>{" "}
+                <span className="text-muted-foreground">gave</span>{" "}
                 <span className="text-muted-foreground">{donationLabel(d.donation_type)}</span>
               </p>
               <p className="text-xs text-muted-foreground">{timeAgo(d.created_at)}</p>

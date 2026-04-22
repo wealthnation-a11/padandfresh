@@ -16,7 +16,12 @@ export function timeAgo(iso: string): string {
   return `${d}d ago`;
 }
 
-export function impactCounts(type: string, amount: number): { girls: number; boys: number } {
+/**
+ * Per-donation impact counts. Now amount-independent — every donation
+ * supports a fixed number of youth based on the program the donor picked.
+ * Legacy types (sponsor_10, custom) are kept readable for old rows.
+ */
+export function impactCounts(type: string, _amount?: number): { girls: number; boys: number } {
   switch (type) {
     case "pad_girl":
       return { girls: 1, boys: 0 };
@@ -26,14 +31,8 @@ export function impactCounts(type: string, amount: number): { girls: number; boy
       return { girls: 1, boys: 1 };
     case "sponsor_10":
       return { girls: 5, boys: 5 };
-    case "custom":
-    default: {
-      // 1 unit per ₦700, split half/half
-      const units = Math.floor(amount / 700);
-      const girls = Math.ceil(units / 2);
-      const boys = Math.floor(units / 2);
-      return { girls, boys };
-    }
+    default:
+      return { girls: 0, boys: 0 };
   }
 }
 
