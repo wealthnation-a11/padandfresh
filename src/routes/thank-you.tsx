@@ -1,12 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { z } from "zod";
-import { Check, Facebook, Twitter, Linkedin, MessageCircle, Repeat, Home, Heart } from "lucide-react";
+import { Check, Facebook, Twitter, Linkedin, MessageCircle, Repeat, Home, Heart, Download, Mail } from "lucide-react";
 import { formatNaira } from "@/lib/format";
+import { downloadReceiptPDF, buildReceiptMailto, type ReceiptData } from "@/lib/receipt";
+import { toast } from "sonner";
 
 const SearchSchema = z.object({
   ref: z.string().optional(),
   amount: z.coerce.number().optional(),
   type: z.string().optional(),
+  name: z.string().optional(),
+  email: z.string().optional(),
 });
 
 export const Route = createFileRoute("/thank-you")({
@@ -18,11 +22,42 @@ export const Route = createFileRoute("/thank-you")({
 });
 
 function ThankYou() {
-  const { ref, amount, type } = Route.useSearch();
+  const { ref, amount, type, name, email } = Route.useSearch();
   const shareText = encodeURIComponent(
     "I just supported a Nigerian youth through PadAndFresh.ng — ₦700 keeps a girl in school or a boy confident. Join me!"
   );
   const shareUrl = encodeURIComponent("https://padandfresh.ng");
+
+  const receipt: ReceiptData = {
+    reference: ref ?? "—",
+    amount: amount ?? 0,
+    type: type ?? "custom",
+    donorName: name,
+    email,
+  };
+  const canDownload = Boolean(ref && amount);
+
+  function handleDownload() {
+    if (!canDownload) {
+      toast.error("Receipt details missing. Please contact support.");
+      return;
+    }
+    try {
+      downloadReceiptPDF(receipt);
+      toast.success("Receipt downloaded 📄");
+    } catch (e) {
+      console.error(e);
+      toast.error("Could not generate receipt.");
+    }
+  }
+
+  function handleEmail() {
+    if (!canDownload) {
+      toast.error("Receipt details missing.");
+      return;
+    }
+    window.location.href = buildReceiptMailto(receipt);
+  }
 
   return (
     <div className="bg-gradient-soft">
@@ -38,13 +73,38 @@ function ThankYou() {
         </div>
 
         <div className="mt-10 rounded-3xl border border-border bg-card p-6 shadow-soft sm:p-8">
-          <h2 className="text-lg font-bold">Donation Summary</h2>
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-lg font-bold">Donation Summary</h2>
+            <span className="rounded-full bg-success/10 px-3 py-1 text-xs font-semibold text-success">Paid</span>
+          </div>
           <dl className="mt-4 grid gap-3 sm:grid-cols-2">
             <Row label="Reference" value={ref ?? "—"} />
             <Row label="Amount" value={amount ? formatNaira(amount) : "—"} />
             <Row label="Program" value={prettyType(type)} />
             <Row label="Date" value={new Date().toLocaleString("en-NG")} />
           </dl>
+
+          <div className="mt-5 flex flex-col gap-2 sm:flex-row">
+            <button
+              type="button"
+              onClick={handleDownload}
+              disabled={!canDownload}
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-hero px-5 py-3 text-sm font-semibold text-white shadow-glow-girl transition-opacity disabled:opacity-50"
+            >
+              <Download className="h-4 w-4" /> Download receipt (PDF)
+            </button>
+            <button
+              type="button"
+              onClick={handleEmail}
+              disabled={!canDownload}
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border-2 border-girl px-5 py-3 text-sm font-semibold text-girl transition-opacity disabled:opacity-50"
+            >
+              <Mail className="h-4 w-4" /> Email me a copy
+            </button>
+          </div>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Your receipt includes the Paystack reference, amount, program, and impact details.
+          </p>
         </div>
 
         <div className="mt-8 rounded-3xl border border-border bg-card p-6 shadow-soft sm:p-8">
