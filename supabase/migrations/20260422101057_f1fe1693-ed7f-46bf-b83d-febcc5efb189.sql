@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "Anyone can update pending donations" ON public.donations;
