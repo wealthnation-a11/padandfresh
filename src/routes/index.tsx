@@ -298,7 +298,7 @@ function ImpactCard({
   price: string;
   items: string[];
   cta: string;
-  type: string;
+  type: "pad_girl" | "fresh_boy" | "both" | "custom" | "sponsor_10";
 }) {
   const bg = tone === "girl" ? "bg-gradient-girl" : tone === "boy" ? "bg-gradient-boy" : "bg-gradient-both";
   const ring = tone === "girl" ? "shadow-glow-girl" : tone === "boy" ? "shadow-glow-boy" : "shadow-soft";
