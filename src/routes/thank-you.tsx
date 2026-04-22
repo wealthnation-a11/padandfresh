@@ -9,6 +9,8 @@ const SearchSchema = z.object({
   ref: z.string().optional(),
   amount: z.coerce.number().optional(),
   type: z.string().optional(),
+  name: z.string().optional(),
+  email: z.string().optional(),
 });
 
 export const Route = createFileRoute("/thank-you")({
@@ -20,11 +22,42 @@ export const Route = createFileRoute("/thank-you")({
 });
 
 function ThankYou() {
-  const { ref, amount, type } = Route.useSearch();
+  const { ref, amount, type, name, email } = Route.useSearch();
   const shareText = encodeURIComponent(
     "I just supported a Nigerian youth through PadAndFresh.ng — ₦700 keeps a girl in school or a boy confident. Join me!"
   );
   const shareUrl = encodeURIComponent("https://padandfresh.ng");
+
+  const receipt: ReceiptData = {
+    reference: ref ?? "—",
+    amount: amount ?? 0,
+    type: type ?? "custom",
+    donorName: name,
+    email,
+  };
+  const canDownload = Boolean(ref && amount);
+
+  function handleDownload() {
+    if (!canDownload) {
+      toast.error("Receipt details missing. Please contact support.");
+      return;
+    }
+    try {
+      downloadReceiptPDF(receipt);
+      toast.success("Receipt downloaded 📄");
+    } catch (e) {
+      console.error(e);
+      toast.error("Could not generate receipt.");
+    }
+  }
+
+  function handleEmail() {
+    if (!canDownload) {
+      toast.error("Receipt details missing.");
+      return;
+    }
+    window.location.href = buildReceiptMailto(receipt);
+  }
 
   return (
     <div className="bg-gradient-soft">
