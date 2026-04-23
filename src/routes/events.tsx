@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Calendar, MapPin, Users, ArrowRight, Heart } from "lucide-react";
-import flyer from "@/assets/pad-a-girl-flyer.jpg";
+import flyer from "@/assets/pad-a-girl-flyer.png";
 import { LiveStatsStrip } from "@/components/LiveStatsStrip";
 
 export const Route = createFileRoute("/events")({
