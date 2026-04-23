@@ -10,6 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ThankYouRouteImport } from './routes/thank-you'
+import { Route as PadATeenageGirlRouteImport } from './routes/pad-a-teenage-girl'
+import { Route as GuardATeenageBoyRouteImport } from './routes/guard-a-teenage-boy'
+import { Route as EventsRouteImport } from './routes/events'
 import { Route as DonateRouteImport } from './routes/donate'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -19,6 +22,21 @@ import { Route as IndexRouteImport } from './routes/index'
 const ThankYouRoute = ThankYouRouteImport.update({
   id: '/thank-you',
   path: '/thank-you',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PadATeenageGirlRoute = PadATeenageGirlRouteImport.update({
+  id: '/pad-a-teenage-girl',
+  path: '/pad-a-teenage-girl',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuardATeenageBoyRoute = GuardATeenageBoyRouteImport.update({
+  id: '/guard-a-teenage-boy',
+  path: '/guard-a-teenage-boy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DonateRoute = DonateRouteImport.update({
@@ -53,6 +71,9 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/donate': typeof DonateRoute
+  '/events': typeof EventsRoute
+  '/guard-a-teenage-boy': typeof GuardATeenageBoyRoute
+  '/pad-a-teenage-girl': typeof PadATeenageGirlRoute
   '/thank-you': typeof ThankYouRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +82,9 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/donate': typeof DonateRoute
+  '/events': typeof EventsRoute
+  '/guard-a-teenage-boy': typeof GuardATeenageBoyRoute
+  '/pad-a-teenage-girl': typeof PadATeenageGirlRoute
   '/thank-you': typeof ThankYouRoute
 }
 export interface FileRoutesById {
@@ -70,6 +94,9 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/donate': typeof DonateRoute
+  '/events': typeof EventsRoute
+  '/guard-a-teenage-boy': typeof GuardATeenageBoyRoute
+  '/pad-a-teenage-girl': typeof PadATeenageGirlRoute
   '/thank-you': typeof ThankYouRoute
 }
 export interface FileRouteTypes {
@@ -80,9 +107,21 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/donate'
+    | '/events'
+    | '/guard-a-teenage-boy'
+    | '/pad-a-teenage-girl'
     | '/thank-you'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/dashboard' | '/donate' | '/thank-you'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/dashboard'
+    | '/donate'
+    | '/events'
+    | '/guard-a-teenage-boy'
+    | '/pad-a-teenage-girl'
+    | '/thank-you'
   id:
     | '__root__'
     | '/'
@@ -90,6 +129,9 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/donate'
+    | '/events'
+    | '/guard-a-teenage-boy'
+    | '/pad-a-teenage-girl'
     | '/thank-you'
   fileRoutesById: FileRoutesById
 }
@@ -99,6 +141,9 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
   DonateRoute: typeof DonateRoute
+  EventsRoute: typeof EventsRoute
+  GuardATeenageBoyRoute: typeof GuardATeenageBoyRoute
+  PadATeenageGirlRoute: typeof PadATeenageGirlRoute
   ThankYouRoute: typeof ThankYouRoute
 }
 
@@ -109,6 +154,27 @@ declare module '@tanstack/react-router' {
       path: '/thank-you'
       fullPath: '/thank-you'
       preLoaderRoute: typeof ThankYouRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pad-a-teenage-girl': {
+      id: '/pad-a-teenage-girl'
+      path: '/pad-a-teenage-girl'
+      fullPath: '/pad-a-teenage-girl'
+      preLoaderRoute: typeof PadATeenageGirlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guard-a-teenage-boy': {
+      id: '/guard-a-teenage-boy'
+      path: '/guard-a-teenage-boy'
+      fullPath: '/guard-a-teenage-boy'
+      preLoaderRoute: typeof GuardATeenageBoyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/donate': {
@@ -155,6 +221,9 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
   DonateRoute: DonateRoute,
+  EventsRoute: EventsRoute,
+  GuardATeenageBoyRoute: GuardATeenageBoyRoute,
+  PadATeenageGirlRoute: PadATeenageGirlRoute,
   ThankYouRoute: ThankYouRoute,
 }
 export const routeTree = rootRouteImport
