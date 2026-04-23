@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Calendar, MapPin, Users, ArrowRight, Heart } from "lucide-react";
 import flyer from "@/assets/pad-a-girl-flyer.jpg";
+import { LiveStatsStrip } from "@/components/LiveStatsStrip";
 
 export const Route = createFileRoute("/events")({
   head: () => ({
@@ -34,6 +35,10 @@ function EventsPage() {
           <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
             Outreach events that put pads, hygiene, education and confidence directly into the hands of Nigerian youth.
           </p>
+        </div>
+
+        <div className="mt-10">
+          <LiveStatsStrip variant="neutral" />
         </div>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-5">
