@@ -159,6 +159,15 @@ function Home() {
             <p className="text-base">
               Starting in <span className="font-semibold text-foreground">Kaduna State</span>. Expanding across Nigeria.
             </p>
+            <div className="pt-2">
+              <Link
+                to="/donate"
+                search={{ type: undefined }}
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-hero px-7 py-4 text-base font-bold text-white shadow-soft transition-transform hover:-translate-y-0.5"
+              >
+                <Heart className="h-4 w-4" /> Donate Now <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
