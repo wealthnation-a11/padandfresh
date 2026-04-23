@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Heart, Sparkles, BookOpen, Shield, TrendingDown, Frown, DoorClosed, Lightbulb } from "lucide-react";
 import heroImg from "@/assets/hero-youth.jpg";
+import prescriblyLogo from "@/assets/prescribly-logo.jpg";
+import softcareLogo from "@/assets/softcare-logo.png";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { LiveDonationFeed } from "@/components/LiveDonationFeed";
 import { useDonations } from "@/hooks/use-donations";
@@ -48,7 +50,7 @@ function Home() {
         <div className="relative mx-auto max-w-7xl px-4 pt-16 pb-24 sm:px-6 sm:pt-20 sm:pb-28">
           <div className="mx-auto max-w-4xl text-center animate-fade-in-up">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5" /> A Prescribly Initiative · Kaduna 2026
+              <Sparkles className="h-3.5 w-3.5" /> A Prescribly Initiative
             </span>
             <h1 className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
               KEEP THEM IN SCHOOL.
@@ -67,7 +69,7 @@ function Home() {
                 search={{ type: "pad_girl" }}
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-girl px-7 py-4 text-base font-bold text-white shadow-glow-girl transition-transform hover:-translate-y-0.5 animate-float"
               >
-                💜 Pad a Girl
+                💜 Pad a Teenage Girl
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
@@ -76,7 +78,7 @@ function Home() {
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-boy px-7 py-4 text-base font-bold text-white shadow-glow-boy transition-transform hover:-translate-y-0.5 animate-float"
                 style={{ animationDelay: "0.2s" }}
               >
-                💙 Fresh Boy
+                💙 Guard a Teenage Boy
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
@@ -150,8 +152,8 @@ function Home() {
         <p className="mt-3 text-center text-muted-foreground">Pick your impact. Give freely. Watch lives change.</p>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          <ImpactCard tone="girl" emoji="💜" title="PAD A GIRL" items={["Pack of Softcare sanitary pads","Reproductive health education session","Keeps her in school all month long"]} cta="Pad a Girl" type="pad_girl" />
-          <ImpactCard tone="boy" emoji="💙" title="FRESH BOY" items={["Quality roll-on deodorant","Age-appropriate cologne / perfume","Hygiene education workshop","Builds confidence and prevents bullying"]} cta="Fresh Boy" type="fresh_boy" />
+          <ImpactCard tone="girl" emoji="💜" title="PAD A TEENAGE GIRL" items={["Pack of Softcare sanitary pads","Reproductive health education session","Keeps her in school all month long"]} cta="Pad a Teenage Girl" type="pad_girl" />
+          <ImpactCard tone="boy" emoji="💙" title="GUARD A TEENAGE BOY" items={["Quality roll-on deodorant","Age-appropriate cologne / perfume","Hygiene education workshop","Builds confidence and prevents bullying"]} cta="Guard a Teenage Boy" type="fresh_boy" />
           <ImpactCard tone="success" emoji="💚" title="SUPPORT BOTH" items={["Transform two lives at once","Complete gender inclusion","Maximize your impact"]} cta="Support Both" type="both" />
         </div>
       </section>
@@ -174,9 +176,33 @@ function Home() {
         <h3 className="text-center text-sm font-semibold uppercase tracking-wider text-muted-foreground">
           In Partnership With
         </h3>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-6">
-          <PartnerLogo name="Softcare" subtitle="Sanitary pads" />
-          <PartnerLogo name="Prescribly" subtitle="Founding partner" highlight />
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-8 sm:gap-14">
+          <div className="flex flex-col items-center gap-2">
+            <div className="grid h-24 w-48 place-items-center rounded-2xl border border-border bg-card p-3 shadow-sm">
+              <img
+                src={prescriblyLogo}
+                alt="Prescribly — Doctor in your pocket"
+                width={512}
+                height={512}
+                loading="lazy"
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
+            <span className="text-xs font-semibold text-muted-foreground">Founding Partner</span>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <div className="grid h-24 w-48 place-items-center rounded-2xl border border-border bg-card p-3 shadow-sm">
+              <img
+                src={softcareLogo}
+                alt="Softcare sanitary pads"
+                width={1264}
+                height={848}
+                loading="lazy"
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
+            <span className="text-xs font-semibold text-muted-foreground">Sanitary Pads Partner</span>
+          </div>
         </div>
       </section>
 
@@ -259,16 +285,3 @@ function StatCard({ icon, text, highlight }: { icon: React.ReactNode; text: stri
   );
 }
 
-function PartnerLogo({ name, subtitle, highlight }: { name: string; subtitle: string; highlight?: boolean }) {
-  return (
-    <div className={"flex items-center gap-3 rounded-2xl border px-5 py-3 " + (highlight ? "border-girl bg-accent" : "border-border bg-card")}>
-      <span className={"grid h-10 w-10 place-items-center rounded-lg font-extrabold text-white " + (highlight ? "bg-gradient-hero" : "bg-gradient-boy")}>
-        {name[0]}
-      </span>
-      <div>
-        <div className="text-sm font-bold">{name}</div>
-        <div className="text-xs text-muted-foreground">{subtitle}</div>
-      </div>
-    </div>
-  );
-}
