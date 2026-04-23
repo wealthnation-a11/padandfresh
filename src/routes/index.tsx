@@ -127,19 +127,35 @@ function Home() {
       <section className="bg-gradient-soft">
         <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6">
           <h2 className="text-3xl font-bold sm:text-4xl">Our Mission</h2>
-          <div className="mx-auto mt-6 max-w-2xl space-y-4 text-lg text-muted-foreground">
+          <div className="mx-auto mt-6 max-w-3xl space-y-6 text-lg text-muted-foreground">
             <p>
-              Every month, thousands of Nigerian girls miss school because they can't afford
-              sanitary pads. Thousands of boys lose confidence and face bullying due to poor hygiene.
+              Every Nigerian teenager deserves dignity. Yet thousands of girls miss school
+              because they can't afford pads, and thousands of boys lose confidence to bullying
+              because they lack basic hygiene products. We're changing that — for both.
             </p>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="rounded-2xl border border-border bg-card p-5 text-left shadow-sm">
+                <h3 className="text-base font-bold text-girl">💜 For the Girls</h3>
+                <ul className="mt-3 space-y-1.5 text-sm">
+                  <li>• Quality sanitary pads for every cycle</li>
+                  <li>• Reproductive health & body literacy education</li>
+                  <li>• Keeping her in school, every day of the month</li>
+                </ul>
+              </div>
+              <div className="rounded-2xl border border-border bg-card p-5 text-left shadow-sm">
+                <h3 className="text-base font-bold text-boy">💙 For the Boys</h3>
+                <ul className="mt-3 space-y-1.5 text-sm">
+                  <li>• Roll-on deodorant + age-appropriate cologne</li>
+                  <li>• Hygiene & grooming workshops</li>
+                  <li>• Building confidence, ending the silent bullying</li>
+                </ul>
+              </div>
+            </div>
+
             <p className="font-semibold text-foreground">
-              We're changing that — one child at a time.
+              One mission. Two genders. Equal dignity.
             </p>
-            <ul className="mx-auto inline-flex flex-col gap-2 text-left text-base">
-              <li>• Quality sanitary pads + health education for girls</li>
-              <li>• Roll-on deodorant + cologne + hygiene education for boys</li>
-              <li>• Building dignity, confidence, and futures</li>
-            </ul>
             <p className="text-base">
               Starting in <span className="font-semibold text-foreground">Kaduna State</span>. Expanding across Nigeria.
             </p>
