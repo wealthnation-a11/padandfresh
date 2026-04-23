@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Shield, Sparkles, Check, Heart, Smile, Users } from "lucide-react";
+import { LiveStatsStrip } from "@/components/LiveStatsStrip";
 
 export const Route = createFileRoute("/guard-a-teenage-boy")({
   head: () => ({
@@ -52,6 +53,11 @@ function GuardABoyPage() {
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* Live impact */}
+      <section className="mx-auto -mt-8 max-w-5xl px-4 sm:px-6">
+        <LiveStatsStrip variant="boy" />
       </section>
 
       {/* What's included */}

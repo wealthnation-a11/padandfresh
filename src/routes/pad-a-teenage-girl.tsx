@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BookOpen, Heart, Shield, Sparkles, Check } from "lucide-react";
 import flyer from "@/assets/pad-a-girl-flyer.jpg";
+import { LiveStatsStrip } from "@/components/LiveStatsStrip";
 
 export const Route = createFileRoute("/pad-a-teenage-girl")({
   head: () => ({
@@ -66,6 +67,11 @@ function PadAGirlPage() {
             />
           </div>
         </div>
+      </section>
+
+      {/* Live impact */}
+      <section className="mx-auto -mt-8 max-w-5xl px-4 sm:px-6">
+        <LiveStatsStrip variant="girl" />
       </section>
 
       {/* What's included */}
