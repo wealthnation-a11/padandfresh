@@ -45,6 +45,9 @@ export function SiteFooter() {
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li><Link to="/" className="hover:text-foreground">Home</Link></li>
             <li><Link to="/about" className="hover:text-foreground">About</Link></li>
+            <li><Link to="/events" className="hover:text-foreground">Events</Link></li>
+            <li><Link to="/pad-a-teenage-girl" className="hover:text-foreground">Pad a Teenage Girl</Link></li>
+            <li><Link to="/guard-a-teenage-boy" className="hover:text-foreground">Guard a Teenage Boy</Link></li>
             <li><Link to="/dashboard" className="hover:text-foreground">Live Impact</Link></li>
             <li><Link to="/donate" search={{ type: undefined }} className="hover:text-foreground">Donate</Link></li>
             <li><Link to="/contact" className="hover:text-foreground">Contact</Link></li>
@@ -56,7 +59,7 @@ export function SiteFooter() {
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-girl" /> 0704 284 1745</li>
             <li className="flex items-center gap-2"><Mail className="h-4 w-4 text-girl" /> hello@padandfresh.ng</li>
-            <li className="flex items-center gap-2"><MapPin className="h-4 w-4 text-girl" /> Kaduna State, Nigeria</li>
+            <li className="flex items-center gap-2"><MapPin className="h-4 w-4 text-girl" /> Abuja, Nigeria</li>
           </ul>
           <div className="mt-4 flex gap-2">
             {[Facebook, Instagram, Twitter, Linkedin].map((Icon, i) => (

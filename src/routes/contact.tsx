@@ -111,7 +111,7 @@ function Contact() {
             <ContactRow icon={<Phone className="h-5 w-5" />} label="Phone" value="0704 284 1745" />
             <ContactRow icon={<MessageCircle className="h-5 w-5" />} label="WhatsApp" value="0704 284 1745" />
             <ContactRow icon={<Mail className="h-5 w-5" />} label="Email" value="hello@padandfresh.ng" />
-            <ContactRow icon={<MapPin className="h-5 w-5" />} label="Address" value="Kaduna State, Nigeria" />
+            <ContactRow icon={<MapPin className="h-5 w-5" />} label="Address" value="Abuja, Nigeria" />
           </aside>
         </div>
       </div>
