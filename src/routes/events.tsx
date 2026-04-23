@@ -63,7 +63,7 @@ function EventsPage() {
 
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 <InfoRow icon={<Calendar className="h-4 w-4" />} label="When" value="Rolling — 2026 cohorts" />
-                <InfoRow icon={<MapPin className="h-4 w-4" />} label="Where" value="Abuja, Nigeria" />
+                <InfoRow icon={<MapPin className="h-4 w-4" />} label="Where" value="Kaduna, Nigeria" />
                 <InfoRow icon={<Users className="h-4 w-4" />} label="Target" value="1,000 youth" />
                 <InfoRow icon={<Heart className="h-4 w-4" />} label="Partner" value="Prescribly · Softcare" />
               </div>
