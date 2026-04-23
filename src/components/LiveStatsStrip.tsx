@@ -22,8 +22,8 @@ export function LiveStatsStrip({ variant = "neutral" }: Props) {
     <div className="rounded-2xl border border-border bg-card p-5 shadow-soft sm:p-6">
       <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
         <span className="relative flex h-2 w-2">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-girl opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-girl" />
         </span>
         <Activity className="h-3.5 w-3.5" /> Live Impact
       </div>
