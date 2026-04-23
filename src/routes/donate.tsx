@@ -27,9 +27,9 @@ export const Route = createFileRoute("/donate")({
 type Plan = "pad_girl" | "fresh_boy" | "both";
 
 const PLAN_INFO: Record<Plan, { label: string; emoji: string; desc: string; tone: string }> = {
-  pad_girl:  { label: "Pad a Girl",   emoji: "💜", desc: "Pads + reproductive health education for one girl", tone: "girl" },
-  fresh_boy: { label: "Fresh Boy",    emoji: "💙", desc: "Deodorant, cologne + hygiene workshop for one boy", tone: "boy" },
-  both:      { label: "Support Both", emoji: "💚", desc: "One girl + one boy. Maximum impact.",               tone: "success" },
+  pad_girl:  { label: "Pad a Teenage Girl",   emoji: "💜", desc: "Pads + reproductive health education for one teenage girl", tone: "girl" },
+  fresh_boy: { label: "Guard a Teenage Boy",  emoji: "💙", desc: "Deodorant, cologne + hygiene workshop for one teenage boy", tone: "boy" },
+  both:      { label: "Support Both",          emoji: "💚", desc: "One girl + one boy. Maximum impact.",                        tone: "success" },
 };
 
 const MIN_AMOUNT = 100;
