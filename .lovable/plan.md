@@ -1,62 +1,91 @@
+# Prescribly Events transformation
 
+## Goal
+Transform the current PadAndFresh donation site into **Prescribly Events**, a premium healthcare events, campaigns, and community platform. PadAndFresh remains a campaign within the wider Prescribly ecosystem. Existing donation tracking and support functionality will be retained under the campaign structure.
 
-## Switch to freewill donations — remove fixed prices everywhere
+## Public experience
 
-The site currently anchors every CTA, card, and stat around the ₦700 price point and pre-set bundles (Pad a Girl, Fresh Boy, Support Both, Sponsor 10). We'll rework the experience so visitors give whatever amount they choose, with no suggested or displayed prices anywhere on the public site. Donations remain a single "give freely" flow that still lets donors pick which program their gift supports (Pad a Girl, Fresh Boy, or Both) for impact reporting — just without a price tag.
+### Brand and shared layout
+- Replace the charity-led visual identity with an institutional African healthcare and technology direction: crisp editorial typography, deep clinical green, bright signal green, ink, warm neutral surfaces, restrained motion, and documentary-style imagery.
+- Rebuild the shared header and footer around Home, Events, Campaigns, Community, Impact, About, and Partner With Us.
+- Make **Register for an Event** the primary action and **Partner With Us** the secondary action, with a polished mobile menu.
+- Replace all global PadAndFresh metadata and social copy with Prescribly Events branding.
 
-### What changes on the public site
+### Homepage
+- Build the requested conversation-led opening with Prescribly identity, the exact headline and copy, and links to Events and Community.
+- Feature Kaduna Digital Health & Wellness Week 2027 as the next major event, with location and clearly unconfirmed date/venue fields.
+- Add the “Healthcare Is Bigger Than an App” narrative, six What We Do pillars, ecosystem pathways, campaigns, community, partnership, and speaker previews.
+- Clearly label all Kaduna numbers as **2027 Event Targets**, never completed impact.
 
-**Home (`/`)**
-- Hero subline: replace "₦700. Two ways to change a Nigerian youth's life." with a freewill-focused line ("Give what you can. Change a life today.")
-- Replace the two pink/blue hero CTAs ("Pad a Girl — ₦700" / "Fresh Boy — ₦700") with two CTAs that drop the price (just "💜 Pad a Girl" / "💙 Fresh Boy")
-- Counters: remove the "Total raised" ₦ counter. Keep Girls supported, Boys supported, Youth supported, Donors this month
-- Mission bullets: drop the "(₦700)" suffixes
-- "How It Works" cards (Pad a Girl / Fresh Boy / Support Both): remove the big ₦700 / ₦1,400 prices; replace with a short tag like "Give freely" or simply omit the price line
-- Final CTA: "Your ₦700 starts now." → "Your gift starts now." Body and button stay focused on giving
+### Events and content library
+- Rebuild `/events` with featured, upcoming, series, online, and past views plus category, date, location, format, and registration-status filters.
+- Add dedicated pages for:
+  - `/events/health-futures`
+  - `/events/kaduna-digital-health-wellness-week-2027`
+  - `/events/webinars`
+  - `/events/online-conversations`
+  - `/events/womens-health`
+  - `/events/youth-digital-health`
+- Populate the supplied topic libraries exactly, without invented dates, venues, speakers, endorsements, or medical claims.
+- Present Kaduna’s three-day programme, campaign connection, audience groups, recognition initiative, and event targets with appropriate “Planned”, “Coming Soon”, and “To Be Announced” states.
 
-**About (`/about`)**
-- Program cards: remove "₦700 per girl" / "₦700 per boy" subtitles
-- "Why Fresh Boy" copy: remove the two ₦700 references; rephrase to focus on access without a price anchor
-- Live impact strip: remove the "Total raised" ₦ stat (replace with something like "Programs running")
-- Final CTA button "Donate ₦700 now" → "Donate now"
+### Campaigns and community
+- Add `/campaigns` plus dedicated pages for PadAndFresh, Pad a Teenage Girl, Guard a Teenage Boy, Women’s Health, Community Health, and Youth & Digital Health.
+- Keep support amounts configurable and preserve the existing freewill donation flow and live donation data under PadAndFresh.
+- Add `/community` with audience pathways and a working community registration form.
+- Add `/speakers` using explicit announcement placeholders only.
+- Add `/partners` and `/sponsors` with the requested partnership and sponsorship models.
 
-**Live donation feed (`LiveDonationFeed`)**
-- Stop showing the ₦ amount in each row. Each entry becomes "{Name} donated {for a girl / for a boy / for a girl & a boy}" with the timestamp underneath. Donors' gift sizes stay private on the public-facing wall.
+### Registration, impact, about, and contact
+- Add `/register` with event-aware registration, profession, interests, and attendance choices.
+- Add a success page with WhatsApp, follow, and calendar actions.
+- Rebuild `/impact` for editable Prescribly-wide metrics, while retaining PadAndFresh’s live support information as a campaign view.
+- Rewrite `/about` around Prescribly Limited, Prescribly Events, and the six stated values.
+- Update `/contact` with organization and the requested interest options while retaining working message submission.
 
-**Dashboard (`/dashboard`)**
-- Remove "Total raised" big stat; replace with "Programs" or expand other tiles
-- Remove the Donation Breakdown card entirely (it shows ₦ totals per program). Replace with a simpler "Youth supported by program" breakdown using counts (girls / boys / both), not naira
-- Top Donors table: remove the "Amount" column. Rank donors by youth supported instead of money. Header becomes "Top Supporters"
+### Legacy URL handling
+- Permanently redirect old campaign paths to their new equivalents:
+  - `/pad-a-teenage-girl` → `/campaigns/padandfresh/pad-a-girl`
+  - `/guard-a-teenage-boy` → `/campaigns/padandfresh/guard-a-boy`
+  - `/donate` remains available as the PadAndFresh support flow, reached from the campaign pages.
+  - `/dashboard` redirects to the relevant Prescribly impact experience.
+- Preserve old public links rather than leaving dead pages.
 
-**Donate flow (`/donate`)**
-- Step 1 ("Choose Your Impact") becomes "Choose what you're supporting" with three tiles only: Pad a Girl, Fresh Boy, Support Both. No prices, no "Sponsor 10", no "Custom Amount" tile
-- Step 2 ("Donation Type") stays — one-time vs monthly
-- A new Step "Your Gift" is added between Type and Info, with a single freewill amount input. Helper text: "Give whatever feels right to you. Minimum ₦100." Min is enforced silently for Paystack viability but no suggested values shown
-- Step 4 (Payment) review: keep the total (donors need to see what they're about to be charged), but remove "≈ supports N youth" math everywhere on the public site. Impact line on the review just shows the program they picked
-- Bottom-of-page running "Total" indicator: only show after the donor has entered an amount (hidden on Steps 1 and 2)
+## Data and administration
 
-**Header (`SiteHeader`)** — no copy with prices, nothing to change.
+### Scalable content model
+- Add structured tables for events, schedules, content-library items, speakers, event-speaker links, campaigns, partners, impact metrics, registrations, community members, profiles, and user roles.
+- Keep existing donations, volunteers, newsletter subscribers, and contact messages, extending only what the new forms require.
+- Include editable event date, venue, capacity, registration status, publishing status, programme, speakers, and SEO fields.
+- Include configurable content status, audience, format, potential speakers, and SEO fields for the topic libraries.
 
-### What changes in the data layer
+### Security and access
+- Add private email/password and Google sign-in for Prescribly administrators.
+- Store team profile details separately from role assignments; use a dedicated user-roles table and server-validated admin checks.
+- Protect administration routes and every private read/write operation; public visitors receive only published event, campaign, speaker, partner, and metric data.
+- Apply row-level security and explicit grants to every new table. Public form tables allow insert-only access and do not expose personal submissions.
 
-- **No DB schema changes.** The `donations` table already stores `amount`, `donation_type`, `girls_count`, `boys_count`. We just stop displaying `amount` publicly.
-- `girls_count` / `boys_count` for new donations: set to `1` for `pad_girl`, `1` for `fresh_boy`, `1+1` for `both`. We're no longer deriving "units per ₦700" from the amount, so the `impactCounts()` helper used at insert-time gets simplified.
-- `donation_type` enum on the form is reduced to `pad_girl | fresh_boy | both`. Existing rows with `custom` / `sponsor_10` remain readable; the dashboard's "Custom / Sponsor" breakdown bar goes away with the breakdown card.
-- The receipt PDF already shows the amount to the donor (private); that stays — it's their personal record.
+### Administration area
+- Build a private `/admin` workspace with sections for Dashboard, Events, Registrations, Speakers, Campaigns, Donations/Support, Partners, Sponsors, Volunteers, Community Members, Impact Metrics, Messages, Content, and Settings.
+- Support event publishing, schedule/topic/speaker management, capacity and registration controls, editable event fields, and CSV registration export.
+- Support content-library management and editable public impact metrics.
+- Provide clear empty, draft, published, planned, closed, and error states.
 
-### Files touched
+## Safety and accuracy
+- Treat all healthcare material as general education, not diagnosis or personalised advice.
+- Add visible educational disclaimers where health topic libraries require them.
+- Never fabricate speakers, dates, venues, sponsors, outcomes, completed impact, medical claims, or organizational commitments.
+- Keep targets visually and semantically distinct from achieved metrics.
 
-- `src/routes/index.tsx` — hero copy, CTA buttons, counters, mission bullets, How It Works cards, final CTA
-- `src/routes/about.tsx` — program card prices, Fresh Boy copy, impact strip, final CTA
-- `src/routes/dashboard.tsx` — remove Total Raised stat, replace breakdown card, drop Amount column
-- `src/routes/donate.tsx` — restructure steps, drop Sponsor 10 + Custom tiles, new freewill amount step, drop unit math
-- `src/components/LiveDonationFeed.tsx` — remove amount display
-- `src/lib/format.ts` — simplify `impactCounts()` (no more amount-derived units; just per-type 1/1/both)
-- Search schema in `donate.tsx` — narrow `type` enum to the 3 supported values; keep backward compatibility for old links by mapping unknown → `pad_girl`
+## Search, sharing, and quality
+- Give every public route unique title, description, Open Graph text, Twitter card, canonical URL, and appropriate structured data.
+- Add a sitemap and crawler rules for all public routes; keep administration and success pages out of search.
+- Use responsive images, stable layouts, accessible controls, reduced-motion support, and mobile-first validation.
+- Verify core journeys on desktop and mobile: browsing and filtering events, registering, joining the community, contacting the team, supporting PadAndFresh, signing into administration, editing content, and exporting registrations.
 
-### What the donor still sees on prices (private only)
-
-- Step 4 review total (so they know what they're paying)
-- Paystack checkout (must show amount)
-- Their downloaded PDF receipt and emailed receipt (their personal record)
-
+## Technical approach
+- Keep the existing TanStack Start structure and Lovable Cloud backend.
+- Centralize supplied editorial content and route metadata in reusable typed content modules while dynamic event/campaign records come from the database.
+- Use authenticated server functions for administration and public server reads for published content.
+- Add migrations with literal initial records for the supplied event series, campaign structure, and content libraries so the first screen is populated immediately.
+- Record architecture rules in `AGENTS.md`, retain route-specific metadata, and validate the final build and live preview before completion.
