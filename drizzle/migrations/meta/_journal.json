@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1790929961263,
+      "tag": "0000_prescribly_events_platform",
+      "breakpoints": true
+    }
+  ]
+}
