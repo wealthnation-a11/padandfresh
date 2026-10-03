@@ -1,90 +1,10 @@
-import { Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { Menu, X, Heart } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-const NAV = [
-  { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
-  { to: "/events", label: "Events" },
-  { to: "/dashboard", label: "Impact" },
-  { to: "/contact", label: "Contact" },
-] as const;
-
+import { Link, useRouterState } from '@tanstack/react-router';
+import { useState } from 'react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+const NAV = [ ['/','Home'], ['/events','Events'], ['/campaigns','Campaigns'], ['/community','Community'], ['/impact','Impact'], ['/about','About'], ['/partners','Partner With Us'] ] as const;
 export function SiteHeader() {
-  const [open, setOpen] = useState(false);
-  return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <Link to="/" className="flex items-center gap-2 font-bold text-lg tracking-tight">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-hero text-white shadow-glow-girl">
-            <Heart className="h-4 w-4" />
-          </span>
-          <span>
-            PadAndFresh<span className="text-girl">.ng</span>
-          </span>
-        </Link>
-
-        <nav className="hidden items-center gap-1 md:flex">
-          {NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-              activeProps={{ className: "text-foreground bg-accent" }}
-              activeOptions={{ exact: item.to === "/" }}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <Link
-            to="/donate"
-            search={{ type: undefined }}
-            className="ml-3 inline-flex items-center justify-center rounded-full bg-gradient-hero px-5 py-2 text-sm font-semibold text-white shadow-glow-girl transition-transform hover:scale-105"
-          >
-            Donate Now
-          </Link>
-        </nav>
-
-        <button
-          className="grid h-10 w-10 place-items-center rounded-md md:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
-      </div>
-
-      <div
-        className={cn(
-          "overflow-hidden border-t border-border/60 bg-background md:hidden",
-          open ? "max-h-96" : "max-h-0",
-          "transition-[max-height] duration-300",
-        )}
-      >
-        <div className="flex flex-col gap-1 p-4">
-          {NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              onClick={() => setOpen(false)}
-              className="rounded-md px-3 py-2.5 text-base font-medium text-foreground hover:bg-accent"
-              activeProps={{ className: "bg-accent text-foreground" }}
-              activeOptions={{ exact: item.to === "/" }}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <Link
-            to="/donate"
-            search={{ type: undefined }}
-            onClick={() => setOpen(false)}
-            className="mt-2 inline-flex items-center justify-center rounded-full bg-gradient-hero px-5 py-3 text-base font-semibold text-white shadow-glow-girl"
-          >
-            Donate Now
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
+  const [open,setOpen] = useState(false);
+  const pathname = useRouterState({ select:s => s.location.pathname });
+  return <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-lg"><div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-5 px-5 sm:px-8"><Link to="/" onClick={() => setOpen(false)} className="flex shrink-0 items-center gap-3"><span className="grid size-9 place-items-center rounded-sm bg-primary text-lg font-black text-primary-foreground">P<span className="text-signal">.</span></span><span className="leading-none"><strong className="block text-lg font-extrabold">PRESCRIBLY</strong><span className="block pt-1 text-[10px] font-bold uppercase text-primary">Events</span></span></Link><nav aria-label="Main navigation" className="hidden items-center gap-4 xl:flex">{NAV.map(([to,label]) => <Link key={to} to={to} className={`text-xs font-semibold transition-colors hover:text-primary ${pathname === to ? 'text-primary' : 'text-muted-foreground'}`}>{label}</Link>)}</nav><div className="hidden items-center gap-2 md:flex"><Button asChild size="sm" variant="outline" className="hidden lg:inline-flex"><Link to="/partners">Partner With Us</Link></Button><Button asChild className="h-10 px-4 text-xs font-bold uppercase"><Link to="/register">Register for an Event <ArrowUpRight /></Link></Button></div><Button variant="ghost" size="icon" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)} className="xl:hidden">{open ? <X /> : <Menu />}</Button></div>{open && <nav aria-label="Mobile navigation" className="border-t border-border bg-background px-5 py-4 xl:hidden"><div className="mx-auto grid max-w-7xl gap-1 sm:grid-cols-2">{NAV.map(([to,label]) => <Link key={to} to={to} onClick={() => setOpen(false)} className="border-b border-border px-2 py-3 text-sm font-semibold">{label}</Link>)}<Link to="/register" onClick={() => setOpen(false)} className="mt-3 bg-primary px-4 py-3 text-center text-sm font-bold text-primary-foreground">Register for an Event</Link></div></nav>}</header>;
 }
