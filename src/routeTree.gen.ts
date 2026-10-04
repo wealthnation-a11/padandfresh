@@ -10,23 +10,64 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ThankYouRouteImport } from './routes/thank-you'
+import { Route as SponsorsRouteImport } from './routes/sponsors'
+import { Route as SpeakersRouteImport } from './routes/speakers'
+import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PadATeenageGirlRouteImport } from './routes/pad-a-teenage-girl'
+import { Route as ImpactRouteImport } from './routes/impact'
 import { Route as GuardATeenageBoyRouteImport } from './routes/guard-a-teenage-boy'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as DonateRouteImport } from './routes/donate'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CommunityRouteImport } from './routes/community'
+import { Route as CampaignsRouteImport } from './routes/campaigns'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EventsIndexRouteImport } from './routes/events.index'
+import { Route as CampaignsIndexRouteImport } from './routes/campaigns.index'
+import { Route as EventsYouthDigitalHealthRouteImport } from './routes/events.youth-digital-health'
+import { Route as EventsWomensHealthRouteImport } from './routes/events.womens-health'
+import { Route as EventsWebinarsRouteImport } from './routes/events.webinars'
+import { Route as EventsOnlineConversationsRouteImport } from './routes/events.online-conversations'
+import { Route as EventsKadunaDigitalHealthWellnessWeek2027RouteImport } from './routes/events.kaduna-digital-health-wellness-week-2027'
+import { Route as EventsHealthFuturesRouteImport } from './routes/events.health-futures'
+import { Route as CampaignsYouthDigitalHealthRouteImport } from './routes/campaigns.youth-digital-health'
+import { Route as CampaignsWomensHealthRouteImport } from './routes/campaigns.womens-health'
+import { Route as CampaignsPadandfreshRouteImport } from './routes/campaigns.padandfresh'
+import { Route as CampaignsCommunityHealthRouteImport } from './routes/campaigns.community-health'
+import { Route as CampaignsPadandfreshIndexRouteImport } from './routes/campaigns.padandfresh.index'
+import { Route as CampaignsPadandfreshPadAGirlRouteImport } from './routes/campaigns.padandfresh.pad-a-girl'
+import { Route as CampaignsPadandfreshGuardABoyRouteImport } from './routes/campaigns.padandfresh.guard-a-boy'
 
 const ThankYouRoute = ThankYouRouteImport.update({
   id: '/thank-you',
   path: '/thank-you',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SponsorsRoute = SponsorsRouteImport.update({
+  id: '/sponsors',
+  path: '/sponsors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SpeakersRoute = SpeakersRouteImport.update({
+  id: '/speakers',
+  path: '/speakers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnersRoute = PartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PadATeenageGirlRoute = PadATeenageGirlRouteImport.update({
   id: '/pad-a-teenage-girl',
   path: '/pad-a-teenage-girl',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpactRoute = ImpactRouteImport.update({
+  id: '/impact',
+  path: '/impact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuardATeenageBoyRoute = GuardATeenageBoyRouteImport.update({
@@ -54,6 +95,16 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampaignsRoute = CampaignsRouteImport.update({
+  id: '/campaigns',
+  path: '/campaigns',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -64,86 +115,295 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventsIndexRoute = EventsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EventsRoute,
+} as any)
+const CampaignsIndexRoute = CampaignsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CampaignsRoute,
+} as any)
+const EventsYouthDigitalHealthRoute =
+  EventsYouthDigitalHealthRouteImport.update({
+    id: '/youth-digital-health',
+    path: '/youth-digital-health',
+    getParentRoute: () => EventsRoute,
+  } as any)
+const EventsWomensHealthRoute = EventsWomensHealthRouteImport.update({
+  id: '/womens-health',
+  path: '/womens-health',
+  getParentRoute: () => EventsRoute,
+} as any)
+const EventsWebinarsRoute = EventsWebinarsRouteImport.update({
+  id: '/webinars',
+  path: '/webinars',
+  getParentRoute: () => EventsRoute,
+} as any)
+const EventsOnlineConversationsRoute =
+  EventsOnlineConversationsRouteImport.update({
+    id: '/online-conversations',
+    path: '/online-conversations',
+    getParentRoute: () => EventsRoute,
+  } as any)
+const EventsKadunaDigitalHealthWellnessWeek2027Route =
+  EventsKadunaDigitalHealthWellnessWeek2027RouteImport.update({
+    id: '/kaduna-digital-health-wellness-week-2027',
+    path: '/kaduna-digital-health-wellness-week-2027',
+    getParentRoute: () => EventsRoute,
+  } as any)
+const EventsHealthFuturesRoute = EventsHealthFuturesRouteImport.update({
+  id: '/health-futures',
+  path: '/health-futures',
+  getParentRoute: () => EventsRoute,
+} as any)
+const CampaignsYouthDigitalHealthRoute =
+  CampaignsYouthDigitalHealthRouteImport.update({
+    id: '/youth-digital-health',
+    path: '/youth-digital-health',
+    getParentRoute: () => CampaignsRoute,
+  } as any)
+const CampaignsWomensHealthRoute = CampaignsWomensHealthRouteImport.update({
+  id: '/womens-health',
+  path: '/womens-health',
+  getParentRoute: () => CampaignsRoute,
+} as any)
+const CampaignsPadandfreshRoute = CampaignsPadandfreshRouteImport.update({
+  id: '/padandfresh',
+  path: '/padandfresh',
+  getParentRoute: () => CampaignsRoute,
+} as any)
+const CampaignsCommunityHealthRoute =
+  CampaignsCommunityHealthRouteImport.update({
+    id: '/community-health',
+    path: '/community-health',
+    getParentRoute: () => CampaignsRoute,
+  } as any)
+const CampaignsPadandfreshIndexRoute =
+  CampaignsPadandfreshIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => CampaignsPadandfreshRoute,
+  } as any)
+const CampaignsPadandfreshPadAGirlRoute =
+  CampaignsPadandfreshPadAGirlRouteImport.update({
+    id: '/pad-a-girl',
+    path: '/pad-a-girl',
+    getParentRoute: () => CampaignsPadandfreshRoute,
+  } as any)
+const CampaignsPadandfreshGuardABoyRoute =
+  CampaignsPadandfreshGuardABoyRouteImport.update({
+    id: '/guard-a-boy',
+    path: '/guard-a-boy',
+    getParentRoute: () => CampaignsPadandfreshRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/campaigns': typeof CampaignsRouteWithChildren
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/donate': typeof DonateRoute
-  '/events': typeof EventsRoute
+  '/events': typeof EventsRouteWithChildren
   '/guard-a-teenage-boy': typeof GuardATeenageBoyRoute
+  '/impact': typeof ImpactRoute
   '/pad-a-teenage-girl': typeof PadATeenageGirlRoute
+  '/partners': typeof PartnersRoute
+  '/speakers': typeof SpeakersRoute
+  '/sponsors': typeof SponsorsRoute
   '/thank-you': typeof ThankYouRoute
+  '/campaigns/community-health': typeof CampaignsCommunityHealthRoute
+  '/campaigns/padandfresh': typeof CampaignsPadandfreshRouteWithChildren
+  '/campaigns/womens-health': typeof CampaignsWomensHealthRoute
+  '/campaigns/youth-digital-health': typeof CampaignsYouthDigitalHealthRoute
+  '/events/health-futures': typeof EventsHealthFuturesRoute
+  '/events/kaduna-digital-health-wellness-week-2027': typeof EventsKadunaDigitalHealthWellnessWeek2027Route
+  '/events/online-conversations': typeof EventsOnlineConversationsRoute
+  '/events/webinars': typeof EventsWebinarsRoute
+  '/events/womens-health': typeof EventsWomensHealthRoute
+  '/events/youth-digital-health': typeof EventsYouthDigitalHealthRoute
+  '/campaigns/': typeof CampaignsIndexRoute
+  '/events/': typeof EventsIndexRoute
+  '/campaigns/padandfresh/guard-a-boy': typeof CampaignsPadandfreshGuardABoyRoute
+  '/campaigns/padandfresh/pad-a-girl': typeof CampaignsPadandfreshPadAGirlRoute
+  '/campaigns/padandfresh/': typeof CampaignsPadandfreshIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/donate': typeof DonateRoute
-  '/events': typeof EventsRoute
   '/guard-a-teenage-boy': typeof GuardATeenageBoyRoute
+  '/impact': typeof ImpactRoute
   '/pad-a-teenage-girl': typeof PadATeenageGirlRoute
+  '/partners': typeof PartnersRoute
+  '/speakers': typeof SpeakersRoute
+  '/sponsors': typeof SponsorsRoute
   '/thank-you': typeof ThankYouRoute
+  '/campaigns/community-health': typeof CampaignsCommunityHealthRoute
+  '/campaigns/womens-health': typeof CampaignsWomensHealthRoute
+  '/campaigns/youth-digital-health': typeof CampaignsYouthDigitalHealthRoute
+  '/events/health-futures': typeof EventsHealthFuturesRoute
+  '/events/kaduna-digital-health-wellness-week-2027': typeof EventsKadunaDigitalHealthWellnessWeek2027Route
+  '/events/online-conversations': typeof EventsOnlineConversationsRoute
+  '/events/webinars': typeof EventsWebinarsRoute
+  '/events/womens-health': typeof EventsWomensHealthRoute
+  '/events/youth-digital-health': typeof EventsYouthDigitalHealthRoute
+  '/campaigns': typeof CampaignsIndexRoute
+  '/events': typeof EventsIndexRoute
+  '/campaigns/padandfresh/guard-a-boy': typeof CampaignsPadandfreshGuardABoyRoute
+  '/campaigns/padandfresh/pad-a-girl': typeof CampaignsPadandfreshPadAGirlRoute
+  '/campaigns/padandfresh': typeof CampaignsPadandfreshIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/campaigns': typeof CampaignsRouteWithChildren
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/donate': typeof DonateRoute
-  '/events': typeof EventsRoute
+  '/events': typeof EventsRouteWithChildren
   '/guard-a-teenage-boy': typeof GuardATeenageBoyRoute
+  '/impact': typeof ImpactRoute
   '/pad-a-teenage-girl': typeof PadATeenageGirlRoute
+  '/partners': typeof PartnersRoute
+  '/speakers': typeof SpeakersRoute
+  '/sponsors': typeof SponsorsRoute
   '/thank-you': typeof ThankYouRoute
+  '/campaigns/community-health': typeof CampaignsCommunityHealthRoute
+  '/campaigns/padandfresh': typeof CampaignsPadandfreshRouteWithChildren
+  '/campaigns/womens-health': typeof CampaignsWomensHealthRoute
+  '/campaigns/youth-digital-health': typeof CampaignsYouthDigitalHealthRoute
+  '/events/health-futures': typeof EventsHealthFuturesRoute
+  '/events/kaduna-digital-health-wellness-week-2027': typeof EventsKadunaDigitalHealthWellnessWeek2027Route
+  '/events/online-conversations': typeof EventsOnlineConversationsRoute
+  '/events/webinars': typeof EventsWebinarsRoute
+  '/events/womens-health': typeof EventsWomensHealthRoute
+  '/events/youth-digital-health': typeof EventsYouthDigitalHealthRoute
+  '/campaigns/': typeof CampaignsIndexRoute
+  '/events/': typeof EventsIndexRoute
+  '/campaigns/padandfresh/guard-a-boy': typeof CampaignsPadandfreshGuardABoyRoute
+  '/campaigns/padandfresh/pad-a-girl': typeof CampaignsPadandfreshPadAGirlRoute
+  '/campaigns/padandfresh/': typeof CampaignsPadandfreshIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/campaigns'
+    | '/community'
     | '/contact'
     | '/dashboard'
     | '/donate'
     | '/events'
     | '/guard-a-teenage-boy'
+    | '/impact'
     | '/pad-a-teenage-girl'
+    | '/partners'
+    | '/speakers'
+    | '/sponsors'
     | '/thank-you'
+    | '/campaigns/community-health'
+    | '/campaigns/padandfresh'
+    | '/campaigns/womens-health'
+    | '/campaigns/youth-digital-health'
+    | '/events/health-futures'
+    | '/events/kaduna-digital-health-wellness-week-2027'
+    | '/events/online-conversations'
+    | '/events/webinars'
+    | '/events/womens-health'
+    | '/events/youth-digital-health'
+    | '/campaigns/'
+    | '/events/'
+    | '/campaigns/padandfresh/guard-a-boy'
+    | '/campaigns/padandfresh/pad-a-girl'
+    | '/campaigns/padandfresh/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/community'
     | '/contact'
     | '/dashboard'
     | '/donate'
-    | '/events'
     | '/guard-a-teenage-boy'
+    | '/impact'
     | '/pad-a-teenage-girl'
+    | '/partners'
+    | '/speakers'
+    | '/sponsors'
     | '/thank-you'
+    | '/campaigns/community-health'
+    | '/campaigns/womens-health'
+    | '/campaigns/youth-digital-health'
+    | '/events/health-futures'
+    | '/events/kaduna-digital-health-wellness-week-2027'
+    | '/events/online-conversations'
+    | '/events/webinars'
+    | '/events/womens-health'
+    | '/events/youth-digital-health'
+    | '/campaigns'
+    | '/events'
+    | '/campaigns/padandfresh/guard-a-boy'
+    | '/campaigns/padandfresh/pad-a-girl'
+    | '/campaigns/padandfresh'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/campaigns'
+    | '/community'
     | '/contact'
     | '/dashboard'
     | '/donate'
     | '/events'
     | '/guard-a-teenage-boy'
+    | '/impact'
     | '/pad-a-teenage-girl'
+    | '/partners'
+    | '/speakers'
+    | '/sponsors'
     | '/thank-you'
+    | '/campaigns/community-health'
+    | '/campaigns/padandfresh'
+    | '/campaigns/womens-health'
+    | '/campaigns/youth-digital-health'
+    | '/events/health-futures'
+    | '/events/kaduna-digital-health-wellness-week-2027'
+    | '/events/online-conversations'
+    | '/events/webinars'
+    | '/events/womens-health'
+    | '/events/youth-digital-health'
+    | '/campaigns/'
+    | '/events/'
+    | '/campaigns/padandfresh/guard-a-boy'
+    | '/campaigns/padandfresh/pad-a-girl'
+    | '/campaigns/padandfresh/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  CampaignsRoute: typeof CampaignsRouteWithChildren
+  CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
   DonateRoute: typeof DonateRoute
-  EventsRoute: typeof EventsRoute
+  EventsRoute: typeof EventsRouteWithChildren
   GuardATeenageBoyRoute: typeof GuardATeenageBoyRoute
+  ImpactRoute: typeof ImpactRoute
   PadATeenageGirlRoute: typeof PadATeenageGirlRoute
+  PartnersRoute: typeof PartnersRoute
+  SpeakersRoute: typeof SpeakersRoute
+  SponsorsRoute: typeof SponsorsRoute
   ThankYouRoute: typeof ThankYouRoute
 }
 
@@ -156,11 +416,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ThankYouRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sponsors': {
+      id: '/sponsors'
+      path: '/sponsors'
+      fullPath: '/sponsors'
+      preLoaderRoute: typeof SponsorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/speakers': {
+      id: '/speakers'
+      path: '/speakers'
+      fullPath: '/speakers'
+      preLoaderRoute: typeof SpeakersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partners': {
+      id: '/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pad-a-teenage-girl': {
       id: '/pad-a-teenage-girl'
       path: '/pad-a-teenage-girl'
       fullPath: '/pad-a-teenage-girl'
       preLoaderRoute: typeof PadATeenageGirlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impact': {
+      id: '/impact'
+      path: '/impact'
+      fullPath: '/impact'
+      preLoaderRoute: typeof ImpactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guard-a-teenage-boy': {
@@ -198,6 +486,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/campaigns': {
+      id: '/campaigns'
+      path: '/campaigns'
+      fullPath: '/campaigns'
+      preLoaderRoute: typeof CampaignsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -212,18 +514,188 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/events/': {
+      id: '/events/'
+      path: '/'
+      fullPath: '/events/'
+      preLoaderRoute: typeof EventsIndexRouteImport
+      parentRoute: typeof EventsRoute
+    }
+    '/campaigns/': {
+      id: '/campaigns/'
+      path: '/'
+      fullPath: '/campaigns/'
+      preLoaderRoute: typeof CampaignsIndexRouteImport
+      parentRoute: typeof CampaignsRoute
+    }
+    '/events/youth-digital-health': {
+      id: '/events/youth-digital-health'
+      path: '/youth-digital-health'
+      fullPath: '/events/youth-digital-health'
+      preLoaderRoute: typeof EventsYouthDigitalHealthRouteImport
+      parentRoute: typeof EventsRoute
+    }
+    '/events/womens-health': {
+      id: '/events/womens-health'
+      path: '/womens-health'
+      fullPath: '/events/womens-health'
+      preLoaderRoute: typeof EventsWomensHealthRouteImport
+      parentRoute: typeof EventsRoute
+    }
+    '/events/webinars': {
+      id: '/events/webinars'
+      path: '/webinars'
+      fullPath: '/events/webinars'
+      preLoaderRoute: typeof EventsWebinarsRouteImport
+      parentRoute: typeof EventsRoute
+    }
+    '/events/online-conversations': {
+      id: '/events/online-conversations'
+      path: '/online-conversations'
+      fullPath: '/events/online-conversations'
+      preLoaderRoute: typeof EventsOnlineConversationsRouteImport
+      parentRoute: typeof EventsRoute
+    }
+    '/events/kaduna-digital-health-wellness-week-2027': {
+      id: '/events/kaduna-digital-health-wellness-week-2027'
+      path: '/kaduna-digital-health-wellness-week-2027'
+      fullPath: '/events/kaduna-digital-health-wellness-week-2027'
+      preLoaderRoute: typeof EventsKadunaDigitalHealthWellnessWeek2027RouteImport
+      parentRoute: typeof EventsRoute
+    }
+    '/events/health-futures': {
+      id: '/events/health-futures'
+      path: '/health-futures'
+      fullPath: '/events/health-futures'
+      preLoaderRoute: typeof EventsHealthFuturesRouteImport
+      parentRoute: typeof EventsRoute
+    }
+    '/campaigns/youth-digital-health': {
+      id: '/campaigns/youth-digital-health'
+      path: '/youth-digital-health'
+      fullPath: '/campaigns/youth-digital-health'
+      preLoaderRoute: typeof CampaignsYouthDigitalHealthRouteImport
+      parentRoute: typeof CampaignsRoute
+    }
+    '/campaigns/womens-health': {
+      id: '/campaigns/womens-health'
+      path: '/womens-health'
+      fullPath: '/campaigns/womens-health'
+      preLoaderRoute: typeof CampaignsWomensHealthRouteImport
+      parentRoute: typeof CampaignsRoute
+    }
+    '/campaigns/padandfresh': {
+      id: '/campaigns/padandfresh'
+      path: '/padandfresh'
+      fullPath: '/campaigns/padandfresh'
+      preLoaderRoute: typeof CampaignsPadandfreshRouteImport
+      parentRoute: typeof CampaignsRoute
+    }
+    '/campaigns/community-health': {
+      id: '/campaigns/community-health'
+      path: '/community-health'
+      fullPath: '/campaigns/community-health'
+      preLoaderRoute: typeof CampaignsCommunityHealthRouteImport
+      parentRoute: typeof CampaignsRoute
+    }
+    '/campaigns/padandfresh/': {
+      id: '/campaigns/padandfresh/'
+      path: '/'
+      fullPath: '/campaigns/padandfresh/'
+      preLoaderRoute: typeof CampaignsPadandfreshIndexRouteImport
+      parentRoute: typeof CampaignsPadandfreshRoute
+    }
+    '/campaigns/padandfresh/pad-a-girl': {
+      id: '/campaigns/padandfresh/pad-a-girl'
+      path: '/pad-a-girl'
+      fullPath: '/campaigns/padandfresh/pad-a-girl'
+      preLoaderRoute: typeof CampaignsPadandfreshPadAGirlRouteImport
+      parentRoute: typeof CampaignsPadandfreshRoute
+    }
+    '/campaigns/padandfresh/guard-a-boy': {
+      id: '/campaigns/padandfresh/guard-a-boy'
+      path: '/guard-a-boy'
+      fullPath: '/campaigns/padandfresh/guard-a-boy'
+      preLoaderRoute: typeof CampaignsPadandfreshGuardABoyRouteImport
+      parentRoute: typeof CampaignsPadandfreshRoute
+    }
   }
 }
+
+interface CampaignsPadandfreshRouteChildren {
+  CampaignsPadandfreshGuardABoyRoute: typeof CampaignsPadandfreshGuardABoyRoute
+  CampaignsPadandfreshPadAGirlRoute: typeof CampaignsPadandfreshPadAGirlRoute
+  CampaignsPadandfreshIndexRoute: typeof CampaignsPadandfreshIndexRoute
+}
+
+const CampaignsPadandfreshRouteChildren: CampaignsPadandfreshRouteChildren = {
+  CampaignsPadandfreshGuardABoyRoute: CampaignsPadandfreshGuardABoyRoute,
+  CampaignsPadandfreshPadAGirlRoute: CampaignsPadandfreshPadAGirlRoute,
+  CampaignsPadandfreshIndexRoute: CampaignsPadandfreshIndexRoute,
+}
+
+const CampaignsPadandfreshRouteWithChildren =
+  CampaignsPadandfreshRoute._addFileChildren(CampaignsPadandfreshRouteChildren)
+
+interface CampaignsRouteChildren {
+  CampaignsCommunityHealthRoute: typeof CampaignsCommunityHealthRoute
+  CampaignsPadandfreshRoute: typeof CampaignsPadandfreshRouteWithChildren
+  CampaignsWomensHealthRoute: typeof CampaignsWomensHealthRoute
+  CampaignsYouthDigitalHealthRoute: typeof CampaignsYouthDigitalHealthRoute
+  CampaignsIndexRoute: typeof CampaignsIndexRoute
+}
+
+const CampaignsRouteChildren: CampaignsRouteChildren = {
+  CampaignsCommunityHealthRoute: CampaignsCommunityHealthRoute,
+  CampaignsPadandfreshRoute: CampaignsPadandfreshRouteWithChildren,
+  CampaignsWomensHealthRoute: CampaignsWomensHealthRoute,
+  CampaignsYouthDigitalHealthRoute: CampaignsYouthDigitalHealthRoute,
+  CampaignsIndexRoute: CampaignsIndexRoute,
+}
+
+const CampaignsRouteWithChildren = CampaignsRoute._addFileChildren(
+  CampaignsRouteChildren,
+)
+
+interface EventsRouteChildren {
+  EventsHealthFuturesRoute: typeof EventsHealthFuturesRoute
+  EventsKadunaDigitalHealthWellnessWeek2027Route: typeof EventsKadunaDigitalHealthWellnessWeek2027Route
+  EventsOnlineConversationsRoute: typeof EventsOnlineConversationsRoute
+  EventsWebinarsRoute: typeof EventsWebinarsRoute
+  EventsWomensHealthRoute: typeof EventsWomensHealthRoute
+  EventsYouthDigitalHealthRoute: typeof EventsYouthDigitalHealthRoute
+  EventsIndexRoute: typeof EventsIndexRoute
+}
+
+const EventsRouteChildren: EventsRouteChildren = {
+  EventsHealthFuturesRoute: EventsHealthFuturesRoute,
+  EventsKadunaDigitalHealthWellnessWeek2027Route:
+    EventsKadunaDigitalHealthWellnessWeek2027Route,
+  EventsOnlineConversationsRoute: EventsOnlineConversationsRoute,
+  EventsWebinarsRoute: EventsWebinarsRoute,
+  EventsWomensHealthRoute: EventsWomensHealthRoute,
+  EventsYouthDigitalHealthRoute: EventsYouthDigitalHealthRoute,
+  EventsIndexRoute: EventsIndexRoute,
+}
+
+const EventsRouteWithChildren =
+  EventsRoute._addFileChildren(EventsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  CampaignsRoute: CampaignsRouteWithChildren,
+  CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
   DonateRoute: DonateRoute,
-  EventsRoute: EventsRoute,
+  EventsRoute: EventsRouteWithChildren,
   GuardATeenageBoyRoute: GuardATeenageBoyRoute,
+  ImpactRoute: ImpactRoute,
   PadATeenageGirlRoute: PadATeenageGirlRoute,
+  PartnersRoute: PartnersRoute,
+  SpeakersRoute: SpeakersRoute,
+  SponsorsRoute: SponsorsRoute,
   ThankYouRoute: ThankYouRoute,
 }
 export const routeTree = rootRouteImport
