@@ -18,6 +18,12 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EventsIndexRouteImport } from './routes/events.index'
+import { Route as EventsYouthDigitalHealthRouteImport } from './routes/events.youth-digital-health'
+import { Route as EventsWomensHealthRouteImport } from './routes/events.womens-health'
+import { Route as EventsWebinarsRouteImport } from './routes/events.webinars'
+import { Route as EventsOnlineConversationsRouteImport } from './routes/events.online-conversations'
+import { Route as EventsHealthFuturesRouteImport } from './routes/events.health-futures'
 
 const ThankYouRoute = ThankYouRouteImport.update({
   id: '/thank-you',
@@ -64,6 +70,38 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventsIndexRoute = EventsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EventsRoute,
+} as any)
+const EventsYouthDigitalHealthRoute =
+  EventsYouthDigitalHealthRouteImport.update({
+    id: '/youth-digital-health',
+    path: '/youth-digital-health',
+    getParentRoute: () => EventsRoute,
+  } as any)
+const EventsWomensHealthRoute = EventsWomensHealthRouteImport.update({
+  id: '/womens-health',
+  path: '/womens-health',
+  getParentRoute: () => EventsRoute,
+} as any)
+const EventsWebinarsRoute = EventsWebinarsRouteImport.update({
+  id: '/webinars',
+  path: '/webinars',
+  getParentRoute: () => EventsRoute,
+} as any)
+const EventsOnlineConversationsRoute =
+  EventsOnlineConversationsRouteImport.update({
+    id: '/online-conversations',
+    path: '/online-conversations',
+    getParentRoute: () => EventsRoute,
+  } as any)
+const EventsHealthFuturesRoute = EventsHealthFuturesRouteImport.update({
+  id: '/health-futures',
+  path: '/health-futures',
+  getParentRoute: () => EventsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -71,10 +109,16 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/donate': typeof DonateRoute
-  '/events': typeof EventsRoute
+  '/events': typeof EventsRouteWithChildren
   '/guard-a-teenage-boy': typeof GuardATeenageBoyRoute
   '/pad-a-teenage-girl': typeof PadATeenageGirlRoute
   '/thank-you': typeof ThankYouRoute
+  '/events/health-futures': typeof EventsHealthFuturesRoute
+  '/events/online-conversations': typeof EventsOnlineConversationsRoute
+  '/events/webinars': typeof EventsWebinarsRoute
+  '/events/womens-health': typeof EventsWomensHealthRoute
+  '/events/youth-digital-health': typeof EventsYouthDigitalHealthRoute
+  '/events/': typeof EventsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -82,10 +126,15 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/donate': typeof DonateRoute
-  '/events': typeof EventsRoute
   '/guard-a-teenage-boy': typeof GuardATeenageBoyRoute
   '/pad-a-teenage-girl': typeof PadATeenageGirlRoute
   '/thank-you': typeof ThankYouRoute
+  '/events/health-futures': typeof EventsHealthFuturesRoute
+  '/events/online-conversations': typeof EventsOnlineConversationsRoute
+  '/events/webinars': typeof EventsWebinarsRoute
+  '/events/womens-health': typeof EventsWomensHealthRoute
+  '/events/youth-digital-health': typeof EventsYouthDigitalHealthRoute
+  '/events': typeof EventsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -94,10 +143,16 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/donate': typeof DonateRoute
-  '/events': typeof EventsRoute
+  '/events': typeof EventsRouteWithChildren
   '/guard-a-teenage-boy': typeof GuardATeenageBoyRoute
   '/pad-a-teenage-girl': typeof PadATeenageGirlRoute
   '/thank-you': typeof ThankYouRoute
+  '/events/health-futures': typeof EventsHealthFuturesRoute
+  '/events/online-conversations': typeof EventsOnlineConversationsRoute
+  '/events/webinars': typeof EventsWebinarsRoute
+  '/events/womens-health': typeof EventsWomensHealthRoute
+  '/events/youth-digital-health': typeof EventsYouthDigitalHealthRoute
+  '/events/': typeof EventsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +166,12 @@ export interface FileRouteTypes {
     | '/guard-a-teenage-boy'
     | '/pad-a-teenage-girl'
     | '/thank-you'
+    | '/events/health-futures'
+    | '/events/online-conversations'
+    | '/events/webinars'
+    | '/events/womens-health'
+    | '/events/youth-digital-health'
+    | '/events/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -118,10 +179,15 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dashboard'
     | '/donate'
-    | '/events'
     | '/guard-a-teenage-boy'
     | '/pad-a-teenage-girl'
     | '/thank-you'
+    | '/events/health-futures'
+    | '/events/online-conversations'
+    | '/events/webinars'
+    | '/events/womens-health'
+    | '/events/youth-digital-health'
+    | '/events'
   id:
     | '__root__'
     | '/'
@@ -133,6 +199,12 @@ export interface FileRouteTypes {
     | '/guard-a-teenage-boy'
     | '/pad-a-teenage-girl'
     | '/thank-you'
+    | '/events/health-futures'
+    | '/events/online-conversations'
+    | '/events/webinars'
+    | '/events/womens-health'
+    | '/events/youth-digital-health'
+    | '/events/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -141,7 +213,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
   DonateRoute: typeof DonateRoute
-  EventsRoute: typeof EventsRoute
+  EventsRoute: typeof EventsRouteWithChildren
   GuardATeenageBoyRoute: typeof GuardATeenageBoyRoute
   PadATeenageGirlRoute: typeof PadATeenageGirlRoute
   ThankYouRoute: typeof ThankYouRoute
@@ -212,8 +284,71 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/events/': {
+      id: '/events/'
+      path: '/'
+      fullPath: '/events/'
+      preLoaderRoute: typeof EventsIndexRouteImport
+      parentRoute: typeof EventsRoute
+    }
+    '/events/youth-digital-health': {
+      id: '/events/youth-digital-health'
+      path: '/youth-digital-health'
+      fullPath: '/events/youth-digital-health'
+      preLoaderRoute: typeof EventsYouthDigitalHealthRouteImport
+      parentRoute: typeof EventsRoute
+    }
+    '/events/womens-health': {
+      id: '/events/womens-health'
+      path: '/womens-health'
+      fullPath: '/events/womens-health'
+      preLoaderRoute: typeof EventsWomensHealthRouteImport
+      parentRoute: typeof EventsRoute
+    }
+    '/events/webinars': {
+      id: '/events/webinars'
+      path: '/webinars'
+      fullPath: '/events/webinars'
+      preLoaderRoute: typeof EventsWebinarsRouteImport
+      parentRoute: typeof EventsRoute
+    }
+    '/events/online-conversations': {
+      id: '/events/online-conversations'
+      path: '/online-conversations'
+      fullPath: '/events/online-conversations'
+      preLoaderRoute: typeof EventsOnlineConversationsRouteImport
+      parentRoute: typeof EventsRoute
+    }
+    '/events/health-futures': {
+      id: '/events/health-futures'
+      path: '/health-futures'
+      fullPath: '/events/health-futures'
+      preLoaderRoute: typeof EventsHealthFuturesRouteImport
+      parentRoute: typeof EventsRoute
+    }
   }
 }
+
+interface EventsRouteChildren {
+  EventsHealthFuturesRoute: typeof EventsHealthFuturesRoute
+  EventsOnlineConversationsRoute: typeof EventsOnlineConversationsRoute
+  EventsWebinarsRoute: typeof EventsWebinarsRoute
+  EventsWomensHealthRoute: typeof EventsWomensHealthRoute
+  EventsYouthDigitalHealthRoute: typeof EventsYouthDigitalHealthRoute
+  EventsIndexRoute: typeof EventsIndexRoute
+}
+
+const EventsRouteChildren: EventsRouteChildren = {
+  EventsHealthFuturesRoute: EventsHealthFuturesRoute,
+  EventsOnlineConversationsRoute: EventsOnlineConversationsRoute,
+  EventsWebinarsRoute: EventsWebinarsRoute,
+  EventsWomensHealthRoute: EventsWomensHealthRoute,
+  EventsYouthDigitalHealthRoute: EventsYouthDigitalHealthRoute,
+  EventsIndexRoute: EventsIndexRoute,
+}
+
+const EventsRouteWithChildren =
+  EventsRoute._addFileChildren(EventsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -221,7 +356,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
   DonateRoute: DonateRoute,
-  EventsRoute: EventsRoute,
+  EventsRoute: EventsRouteWithChildren,
   GuardATeenageBoyRoute: GuardATeenageBoyRoute,
   PadATeenageGirlRoute: PadATeenageGirlRoute,
   ThankYouRoute: ThankYouRoute,
