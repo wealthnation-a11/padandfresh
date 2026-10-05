@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as SponsorsRouteImport } from './routes/sponsors'
 import { Route as SpeakersRouteImport } from './routes/speakers'
+import { Route as RegistrationSuccessRouteImport } from './routes/registration-success'
+import { Route as RegisterRouteImport } from './routes/register'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PadATeenageGirlRouteImport } from './routes/pad-a-teenage-girl'
 import { Route as ImpactRouteImport } from './routes/impact'
@@ -53,6 +55,16 @@ const SponsorsRoute = SponsorsRouteImport.update({
 const SpeakersRoute = SpeakersRouteImport.update({
   id: '/speakers',
   path: '/speakers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistrationSuccessRoute = RegistrationSuccessRouteImport.update({
+  id: '/registration-success',
+  path: '/registration-success',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PartnersRoute = PartnersRouteImport.update({
@@ -212,6 +224,8 @@ export interface FileRoutesByFullPath {
   '/impact': typeof ImpactRoute
   '/pad-a-teenage-girl': typeof PadATeenageGirlRoute
   '/partners': typeof PartnersRoute
+  '/register': typeof RegisterRoute
+  '/registration-success': typeof RegistrationSuccessRoute
   '/speakers': typeof SpeakersRoute
   '/sponsors': typeof SponsorsRoute
   '/thank-you': typeof ThankYouRoute
@@ -242,6 +256,8 @@ export interface FileRoutesByTo {
   '/impact': typeof ImpactRoute
   '/pad-a-teenage-girl': typeof PadATeenageGirlRoute
   '/partners': typeof PartnersRoute
+  '/register': typeof RegisterRoute
+  '/registration-success': typeof RegistrationSuccessRoute
   '/speakers': typeof SpeakersRoute
   '/sponsors': typeof SponsorsRoute
   '/thank-you': typeof ThankYouRoute
@@ -274,6 +290,8 @@ export interface FileRoutesById {
   '/impact': typeof ImpactRoute
   '/pad-a-teenage-girl': typeof PadATeenageGirlRoute
   '/partners': typeof PartnersRoute
+  '/register': typeof RegisterRoute
+  '/registration-success': typeof RegistrationSuccessRoute
   '/speakers': typeof SpeakersRoute
   '/sponsors': typeof SponsorsRoute
   '/thank-you': typeof ThankYouRoute
@@ -308,6 +326,8 @@ export interface FileRouteTypes {
     | '/impact'
     | '/pad-a-teenage-girl'
     | '/partners'
+    | '/register'
+    | '/registration-success'
     | '/speakers'
     | '/sponsors'
     | '/thank-you'
@@ -338,6 +358,8 @@ export interface FileRouteTypes {
     | '/impact'
     | '/pad-a-teenage-girl'
     | '/partners'
+    | '/register'
+    | '/registration-success'
     | '/speakers'
     | '/sponsors'
     | '/thank-you'
@@ -369,6 +391,8 @@ export interface FileRouteTypes {
     | '/impact'
     | '/pad-a-teenage-girl'
     | '/partners'
+    | '/register'
+    | '/registration-success'
     | '/speakers'
     | '/sponsors'
     | '/thank-you'
@@ -402,6 +426,8 @@ export interface RootRouteChildren {
   ImpactRoute: typeof ImpactRoute
   PadATeenageGirlRoute: typeof PadATeenageGirlRoute
   PartnersRoute: typeof PartnersRoute
+  RegisterRoute: typeof RegisterRoute
+  RegistrationSuccessRoute: typeof RegistrationSuccessRoute
   SpeakersRoute: typeof SpeakersRoute
   SponsorsRoute: typeof SponsorsRoute
   ThankYouRoute: typeof ThankYouRoute
@@ -428,6 +454,20 @@ declare module '@tanstack/react-router' {
       path: '/speakers'
       fullPath: '/speakers'
       preLoaderRoute: typeof SpeakersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registration-success': {
+      id: '/registration-success'
+      path: '/registration-success'
+      fullPath: '/registration-success'
+      preLoaderRoute: typeof RegistrationSuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/partners': {
@@ -694,6 +734,8 @@ const rootRouteChildren: RootRouteChildren = {
   ImpactRoute: ImpactRoute,
   PadATeenageGirlRoute: PadATeenageGirlRoute,
   PartnersRoute: PartnersRoute,
+  RegisterRoute: RegisterRoute,
+  RegistrationSuccessRoute: RegistrationSuccessRoute,
   SpeakersRoute: SpeakersRoute,
   SponsorsRoute: SponsorsRoute,
   ThankYouRoute: ThankYouRoute,
