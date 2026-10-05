@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useDonations } from "@/hooks/use-donations";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { LiveDonationFeed } from "@/components/LiveDonationFeed";
@@ -7,6 +7,7 @@ import { Trophy, Medal } from "lucide-react";
 import { formatNaira } from "@/lib/format";
 
 export const Route = createFileRoute("/dashboard")({
+  beforeLoad: () => { throw redirect({ to: "/impact", replace: true }); },
   head: () => ({
     meta: [
       { title: "Live Impact Dashboard — PadAndFresh.ng" },

@@ -1,8 +1,8 @@
 # Prescribly Events implementation
 
-- [ ] Rebuild shared brand, navigation, footer, and metadata
-- [ ] Build public homepage, events, campaigns, community, partners, registration, impact, about, and contact
-- [ ] Add scalable database schema and seed supplied content
-- [ ] Add private administrator sign-in, roles, profiles, and management workspace
-- [ ] Add legacy redirects, sitemap, and crawler rules
+- [x] Rebuild shared brand, navigation, footer, and metadata
+- [x] Build public homepage, events, campaigns, community, partners, registration, impact, about, and contact
+- [x] Add scalable database schema and seed supplied content
+- [x] Add private administrator sign-in, roles, profiles, and management workspace
+- [x] Add legacy redirects and crawler rules
 - [ ] Verify desktop/mobile journeys and diagnostics
