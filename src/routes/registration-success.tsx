@@ -1,0 +1,8 @@
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { z } from 'zod';
+import { CalendarPlus, MessageCircle, Share2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { pageHead } from '@/lib/prescribly-content';
+const searchSchema=z.object({event:z.string().optional()});
+export const Route=createFileRoute('/registration-success')({validateSearch:s=>searchSchema.parse(s),head:()=>pageHead('/registration-success','Registration received','Your Prescribly Events registration has been received.',true),component:Success});
+function Success(){const text=encodeURIComponent('I registered my interest in Prescribly Events — conversations, communities, healthcare and impact.');return <div className="mx-auto max-w-3xl px-5 py-28 text-center"><div className="mx-auto grid size-16 place-items-center bg-primary text-3xl text-primary-foreground">✓</div><h1 className="mt-7 text-4xl font-bold">Registration received.</h1><p className="mx-auto mt-4 max-w-xl text-muted-foreground">Thank you for registering your interest. We'll share confirmed date, venue and attendance details when they are available.</p><div className="mt-9 flex flex-wrap justify-center gap-3"><Button asChild><a href={`https://wa.me/?text=${text}`} target="_blank" rel="noreferrer"><MessageCircle/>Share on WhatsApp</a></Button><Button asChild variant="outline"><a href="https://prescribly.app" target="_blank" rel="noreferrer"><Share2/>Follow Prescribly</a></Button><Button variant="outline" disabled title="Available when the event date is confirmed"><CalendarPlus/>Add to calendar · Coming soon</Button></div><Link to="/events" className="mt-10 inline-block text-sm font-bold text-primary">Explore more events ↗</Link></div>}

@@ -1,9 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { ArrowRight, BookOpen, Heart, Shield, Sparkles, Check } from "lucide-react";
 import flyer from "@/assets/pad-a-girl-flyer.jpg";
 import { LiveStatsStrip } from "@/components/LiveStatsStrip";
 
 export const Route = createFileRoute("/pad-a-teenage-girl")({
+  beforeLoad: () => { throw redirect({ to: "/campaigns/padandfresh/pad-a-girl", replace: true }); },
   head: () => ({
     meta: [
       { title: "Pad a Teenage Girl — PadAndFresh.ng" },

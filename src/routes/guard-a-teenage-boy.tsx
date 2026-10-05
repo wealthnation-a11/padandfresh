@@ -1,8 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { ArrowRight, Shield, Sparkles, Check, Heart, Smile, Users } from "lucide-react";
 import { LiveStatsStrip } from "@/components/LiveStatsStrip";
 
 export const Route = createFileRoute("/guard-a-teenage-boy")({
+  beforeLoad: () => { throw redirect({ to: "/campaigns/padandfresh/guard-a-boy", replace: true }); },
   head: () => ({
     meta: [
       { title: "Guard a Teenage Boy — PadAndFresh.ng" },

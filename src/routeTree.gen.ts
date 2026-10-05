@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as SponsorsRouteImport } from './routes/sponsors'
 import { Route as SpeakersRouteImport } from './routes/speakers'
+import { Route as RegistrationSuccessRouteImport } from './routes/registration-success'
+import { Route as RegisterRouteImport } from './routes/register'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PadATeenageGirlRouteImport } from './routes/pad-a-teenage-girl'
 import { Route as ImpactRouteImport } from './routes/impact'
@@ -22,7 +24,9 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as CampaignsRouteImport } from './routes/campaigns'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EventsIndexRouteImport } from './routes/events.index'
 import { Route as CampaignsIndexRouteImport } from './routes/campaigns.index'
@@ -36,6 +40,7 @@ import { Route as CampaignsYouthDigitalHealthRouteImport } from './routes/campai
 import { Route as CampaignsWomensHealthRouteImport } from './routes/campaigns.womens-health'
 import { Route as CampaignsPadandfreshRouteImport } from './routes/campaigns.padandfresh'
 import { Route as CampaignsCommunityHealthRouteImport } from './routes/campaigns.community-health'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as CampaignsPadandfreshIndexRouteImport } from './routes/campaigns.padandfresh.index'
 import { Route as CampaignsPadandfreshPadAGirlRouteImport } from './routes/campaigns.padandfresh.pad-a-girl'
 import { Route as CampaignsPadandfreshGuardABoyRouteImport } from './routes/campaigns.padandfresh.guard-a-boy'
@@ -53,6 +58,16 @@ const SponsorsRoute = SponsorsRouteImport.update({
 const SpeakersRoute = SpeakersRouteImport.update({
   id: '/speakers',
   path: '/speakers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistrationSuccessRoute = RegistrationSuccessRouteImport.update({
+  id: '/registration-success',
+  path: '/registration-success',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PartnersRoute = PartnersRouteImport.update({
@@ -105,9 +120,18 @@ const CampaignsRoute = CampaignsRouteImport.update({
   path: '/campaigns',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -180,6 +204,11 @@ const CampaignsCommunityHealthRoute =
     path: '/community-health',
     getParentRoute: () => CampaignsRoute,
   } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const CampaignsPadandfreshIndexRoute =
   CampaignsPadandfreshIndexRouteImport.update({
     id: '/',
@@ -202,6 +231,7 @@ const CampaignsPadandfreshGuardABoyRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/campaigns': typeof CampaignsRouteWithChildren
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
@@ -212,9 +242,12 @@ export interface FileRoutesByFullPath {
   '/impact': typeof ImpactRoute
   '/pad-a-teenage-girl': typeof PadATeenageGirlRoute
   '/partners': typeof PartnersRoute
+  '/register': typeof RegisterRoute
+  '/registration-success': typeof RegistrationSuccessRoute
   '/speakers': typeof SpeakersRoute
   '/sponsors': typeof SponsorsRoute
   '/thank-you': typeof ThankYouRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/campaigns/community-health': typeof CampaignsCommunityHealthRoute
   '/campaigns/padandfresh': typeof CampaignsPadandfreshRouteWithChildren
   '/campaigns/womens-health': typeof CampaignsWomensHealthRoute
@@ -234,6 +267,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
@@ -242,9 +276,12 @@ export interface FileRoutesByTo {
   '/impact': typeof ImpactRoute
   '/pad-a-teenage-girl': typeof PadATeenageGirlRoute
   '/partners': typeof PartnersRoute
+  '/register': typeof RegisterRoute
+  '/registration-success': typeof RegistrationSuccessRoute
   '/speakers': typeof SpeakersRoute
   '/sponsors': typeof SponsorsRoute
   '/thank-you': typeof ThankYouRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/campaigns/community-health': typeof CampaignsCommunityHealthRoute
   '/campaigns/womens-health': typeof CampaignsWomensHealthRoute
   '/campaigns/youth-digital-health': typeof CampaignsYouthDigitalHealthRoute
@@ -263,7 +300,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/campaigns': typeof CampaignsRouteWithChildren
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
@@ -274,9 +313,12 @@ export interface FileRoutesById {
   '/impact': typeof ImpactRoute
   '/pad-a-teenage-girl': typeof PadATeenageGirlRoute
   '/partners': typeof PartnersRoute
+  '/register': typeof RegisterRoute
+  '/registration-success': typeof RegistrationSuccessRoute
   '/speakers': typeof SpeakersRoute
   '/sponsors': typeof SponsorsRoute
   '/thank-you': typeof ThankYouRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/campaigns/community-health': typeof CampaignsCommunityHealthRoute
   '/campaigns/padandfresh': typeof CampaignsPadandfreshRouteWithChildren
   '/campaigns/womens-health': typeof CampaignsWomensHealthRoute
@@ -298,6 +340,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/auth'
     | '/campaigns'
     | '/community'
     | '/contact'
@@ -308,9 +351,12 @@ export interface FileRouteTypes {
     | '/impact'
     | '/pad-a-teenage-girl'
     | '/partners'
+    | '/register'
+    | '/registration-success'
     | '/speakers'
     | '/sponsors'
     | '/thank-you'
+    | '/admin'
     | '/campaigns/community-health'
     | '/campaigns/padandfresh'
     | '/campaigns/womens-health'
@@ -330,6 +376,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/auth'
     | '/community'
     | '/contact'
     | '/dashboard'
@@ -338,9 +385,12 @@ export interface FileRouteTypes {
     | '/impact'
     | '/pad-a-teenage-girl'
     | '/partners'
+    | '/register'
+    | '/registration-success'
     | '/speakers'
     | '/sponsors'
     | '/thank-you'
+    | '/admin'
     | '/campaigns/community-health'
     | '/campaigns/womens-health'
     | '/campaigns/youth-digital-health'
@@ -358,7 +408,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
+    | '/auth'
     | '/campaigns'
     | '/community'
     | '/contact'
@@ -369,9 +421,12 @@ export interface FileRouteTypes {
     | '/impact'
     | '/pad-a-teenage-girl'
     | '/partners'
+    | '/register'
+    | '/registration-success'
     | '/speakers'
     | '/sponsors'
     | '/thank-you'
+    | '/_authenticated/admin'
     | '/campaigns/community-health'
     | '/campaigns/padandfresh'
     | '/campaigns/womens-health'
@@ -391,7 +446,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
+  AuthRoute: typeof AuthRoute
   CampaignsRoute: typeof CampaignsRouteWithChildren
   CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
@@ -402,6 +459,8 @@ export interface RootRouteChildren {
   ImpactRoute: typeof ImpactRoute
   PadATeenageGirlRoute: typeof PadATeenageGirlRoute
   PartnersRoute: typeof PartnersRoute
+  RegisterRoute: typeof RegisterRoute
+  RegistrationSuccessRoute: typeof RegistrationSuccessRoute
   SpeakersRoute: typeof SpeakersRoute
   SponsorsRoute: typeof SponsorsRoute
   ThankYouRoute: typeof ThankYouRoute
@@ -428,6 +487,20 @@ declare module '@tanstack/react-router' {
       path: '/speakers'
       fullPath: '/speakers'
       preLoaderRoute: typeof SpeakersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registration-success': {
+      id: '/registration-success'
+      path: '/registration-success'
+      fullPath: '/registration-success'
+      preLoaderRoute: typeof RegistrationSuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/partners': {
@@ -500,11 +573,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CampaignsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -598,6 +685,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CampaignsCommunityHealthRouteImport
       parentRoute: typeof CampaignsRoute
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/campaigns/padandfresh/': {
       id: '/campaigns/padandfresh/'
       path: '/'
@@ -621,6 +715,17 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface CampaignsPadandfreshRouteChildren {
   CampaignsPadandfreshGuardABoyRoute: typeof CampaignsPadandfreshGuardABoyRoute
@@ -683,7 +788,9 @@ const EventsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
+  AuthRoute: AuthRoute,
   CampaignsRoute: CampaignsRouteWithChildren,
   CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,
@@ -694,6 +801,8 @@ const rootRouteChildren: RootRouteChildren = {
   ImpactRoute: ImpactRoute,
   PadATeenageGirlRoute: PadATeenageGirlRoute,
   PartnersRoute: PartnersRoute,
+  RegisterRoute: RegisterRoute,
+  RegistrationSuccessRoute: RegistrationSuccessRoute,
   SpeakersRoute: SpeakersRoute,
   SponsorsRoute: SponsorsRoute,
   ThankYouRoute: ThankYouRoute,
