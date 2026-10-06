@@ -1,5 +1,8 @@
 # Prescribly Events implementation
 
+- [ ] Change the shared brand palette to blue
+- [ ] Verify existing backend and management access; address requested backend additions
+
 - [x] Rebuild shared brand, navigation, footer, and metadata
 - [x] Build public homepage, events, campaigns, community, partners, registration, impact, about, and contact
 - [x] Add scalable database schema and seed supplied content
