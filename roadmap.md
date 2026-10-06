@@ -2,7 +2,8 @@
 
 - [x] Change the shared brand palette to blue
 - [x] Verify existing backend and management access
-- [ ] Add requested backend capabilities — awaiting user's choice of management features; existing admin shows counts and registration exports, not content editing
+- [ ] Add create/edit/publish tools for events, campaigns, speakers, and partners
+- [ ] Connect edited content to public pages and verify management permissions
 
 - [x] Rebuild shared brand, navigation, footer, and metadata
 - [x] Build public homepage, events, campaigns, community, partners, registration, impact, about, and contact
