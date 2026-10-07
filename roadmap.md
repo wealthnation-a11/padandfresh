@@ -12,3 +12,5 @@
 - [x] Add private administrator sign-in, roles, profiles, and management workspace
 - [x] Add legacy redirects and crawler rules
 - [x] Verify desktop/mobile journeys and diagnostics
+- [ ] Add confirmed-date calendar downloads and Google Calendar links on registration success
+- [ ] Add downloadable sponsor and partner briefing PDFs to their public pages
