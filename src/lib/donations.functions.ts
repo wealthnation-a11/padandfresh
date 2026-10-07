@@ -1,6 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 const CompleteSchema = z.object({
   reference: z.string().min(4).max(128).regex(/^[A-Za-z0-9_-]+$/),
@@ -15,6 +14,7 @@ const CompleteSchema = z.object({
 export const completeDonation = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => CompleteSchema.parse(input))
   .handler(async ({ data }) => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: updated, error } = await supabaseAdmin
       .from("donations")
       .update({ payment_status: "completed" })
