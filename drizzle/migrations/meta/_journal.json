@@ -8,6 +8,13 @@
       "when": 1790929961263,
       "tag": "0000_prescribly_events_platform",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791340378633,
+      "tag": "0001_restrict_selected_public_writes",
+      "breakpoints": true
     }
   ]
 }
