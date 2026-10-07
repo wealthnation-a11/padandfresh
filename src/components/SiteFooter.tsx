@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useServerFn } from '@tanstack/react-start';
 import { subscribeToNewsletter } from '@/lib/public-submissions.functions';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 const GROUPS = [ ['Explore', [['Events','/events'],['Campaigns','/campaigns'],['Community','/community'],['Impact','/impact'],['Speakers','/speakers']]], ['Get involved', [['Register','/register'],['Partner With Us','/partners'],['Sponsorship','/sponsors'],['Contact','/contact'],['PadAndFresh','/campaigns/padandfresh']]] ] as const;
 export function SiteFooter() {
  const [email,setEmail]=useState(''); const [busy,setBusy]=useState(false); const subscribeNewsletter=useServerFn(subscribeToNewsletter);
