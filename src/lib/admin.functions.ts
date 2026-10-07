@@ -12,7 +12,9 @@ export const saveAdminContent=createServerFn({method:'POST'}).middleware([requir
  .inputValidator((input:unknown)=>z.object({table:z.enum(contentTables),id:z.string().uuid().optional(),record:z.record(z.string(),z.unknown())}).parse(input))
  .handler(async({data,context})=>{
   await assertTeam(context);
-  const record=editorSchemas[data.table].parse(data.record);
+  const parsed=editorSchemas[data.table].safeParse(data.record);
+  if(!parsed.success) throw new Error(parsed.error.issues.map(i=>`${i.path.join('.')}: ${i.message}`).join('; '));
+  const record=parsed.data;
   if(data.table==='events') { const event=editorSchemas.events.parse(record); if(event.starts_at&&event.ends_at&&event.ends_at<=event.starts_at) throw new Error('End time must be after the start time.'); }
   const db=context.supabase;
   const result=data.id ? await db.from(data.table).update(record).eq('id',data.id).select('id').single() : await db.from(data.table).insert(record).select('id').single();
