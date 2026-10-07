@@ -1,10 +1,11 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { ArrowRight, ArrowLeft, Check, Lock, CreditCard, Smartphone, Building2, Heart } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { completeDonation } from "@/lib/donations.functions";
-import { formatNaira, impactCounts } from "@/lib/format";
+import { createDonation } from "@/lib/public-submissions.functions";
+import { formatNaira } from "@/lib/format";
 import { toast } from "sonner";
 
 const SearchSchema = z.object({
@@ -35,6 +36,7 @@ const PLAN_INFO: Record<Plan, { label: string; emoji: string; desc: string; tone
 const MIN_AMOUNT = 100;
 
 function DonatePage() {
+  const startDonation = useServerFn(createDonation);
   const search = Route.useSearch();
   const navigate = useNavigate();
 
@@ -50,8 +52,6 @@ function DonatePage() {
   const [updates, setUpdates] = useState(true);
   const [paying, setPaying] = useState(false);
 
-  const impact = impactCounts(plan);
-
   function next() {
     if (step === 3 && amount < MIN_AMOUNT) return toast.error(`Please enter at least ${formatNaira(MIN_AMOUNT)}.`);
     if (step === 4) {
@@ -64,25 +64,22 @@ function DonatePage() {
 
   async function handlePay() {
     setPaying(true);
-    const ref = `PAF-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
-
-    const { error: insertErr } = await supabase.from("donations").insert({
-      payment_reference: ref,
-      amount,
-      donation_type: plan,
-      girls_count: impact.girls,
-      boys_count: impact.boys,
-      donor_name: anonymous ? null : name.trim(),
-      email: email.trim(),
-      phone: phone.trim() || null,
-      is_anonymous: anonymous,
-      display_publicly: displayPublicly && !anonymous,
-      is_recurring: recurring === "monthly",
-      receive_updates: updates,
-      payment_status: "pending",
-    });
-
-    if (insertErr) {
+    let ref: string;
+    try {
+      const created = await startDonation({ data: {
+        amount,
+        donation_type: plan,
+        donor_name: anonymous ? null : name.trim(),
+        email: email.trim(),
+        phone: phone.trim() || null,
+        is_anonymous: anonymous,
+        display_publicly: displayPublicly,
+        is_recurring: recurring === "monthly",
+        receive_updates: updates,
+      } });
+      if (!created.ok) throw new Error("Could not save donation");
+      ref = created.reference;
+    } catch {
       setPaying(false);
       toast.error("Could not start donation. Please try again.");
       return;
