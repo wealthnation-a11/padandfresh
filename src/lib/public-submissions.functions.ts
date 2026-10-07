@@ -49,7 +49,6 @@ export const submitEventRegistration = createServerFn({ method: 'POST' })
       .from('events')
       .select('slug')
       .eq('slug', data.event_slug)
-      .eq('status', 'published')
       .maybeSingle();
     if (eventError || !event) return { ok: false as const };
 
@@ -64,7 +63,7 @@ export const submitEventRegistration = createServerFn({ method: 'POST' })
       attendance: data.attendance,
       event_slug: event.slug,
     });
-    return { ok: !error as boolean, event_slug: event.slug };
+    return { ok: error === null, event_slug: event.slug };
   });
 
 const communitySchema = z.object({
@@ -99,7 +98,7 @@ export const subscribeToNewsletter = createServerFn({ method: 'POST' })
     const { supabaseAdmin } = await import('@/integrations/supabase/client.server');
     const { error } = await supabaseAdmin.from('newsletter_subscribers').insert({ email: data.email });
     if (error?.code === '23505') return { ok: true as const };
-    return { ok: !error as boolean };
+    return { ok: error === null };
   });
 
 const donationSchema = z.object({
