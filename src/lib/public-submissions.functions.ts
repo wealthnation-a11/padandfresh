@@ -26,7 +26,7 @@ export const submitVolunteerApplication = createServerFn({ method: 'POST' })
       availability: data.availability || null,
       message: data.message || null,
     });
-    return { ok: !error };
+    return { ok: error === null };
   });
 
 const registrationSchema = z.object({
@@ -89,7 +89,7 @@ export const joinCommunity = createServerFn({ method: 'POST' })
       member_type: data.member_type,
       interests: data.interests,
     });
-    return { ok: !error };
+    return { ok: error === null };
   });
 
 export const subscribeToNewsletter = createServerFn({ method: 'POST' })
@@ -161,5 +161,5 @@ export const sendContactMessage = createServerFn({ method: 'POST' })
       subject: data.interest,
       message: data.message,
     });
-    return { ok: !error };
+    return { ok: error === null };
   });
