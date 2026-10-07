@@ -4,3 +4,4 @@
 - Keep Prescribly-wide content separate from PadAndFresh donation data because PadAndFresh is one campaign within the events ecosystem.
 - Protect administration with a pathless authenticated route plus server-validated role checks because route visibility alone is not a security boundary.
 - Keep content editing schemas and field definitions in a shared module, and validate allowlisted writes through authenticated team server functions so public content and administration stay consistent without privileged clients.
+- Route public form writes through server-validated submission functions while denying direct public table inserts, so open forms cannot accept arbitrary database records.
