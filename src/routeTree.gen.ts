@@ -42,8 +42,10 @@ import { Route as CampaignsPadandfreshRouteImport } from './routes/campaigns.pad
 import { Route as CampaignsCommunityHealthRouteImport } from './routes/campaigns.community-health'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as CampaignsPadandfreshIndexRouteImport } from './routes/campaigns.padandfresh.index'
+import { Route as EventsDetailsSlugRouteImport } from './routes/events.details.$slug'
 import { Route as CampaignsPadandfreshPadAGirlRouteImport } from './routes/campaigns.padandfresh.pad-a-girl'
 import { Route as CampaignsPadandfreshGuardABoyRouteImport } from './routes/campaigns.padandfresh.guard-a-boy'
+import { Route as CampaignsDetailsSlugRouteImport } from './routes/campaigns.details.$slug'
 
 const ThankYouRoute = ThankYouRouteImport.update({
   id: '/thank-you',
@@ -215,6 +217,11 @@ const CampaignsPadandfreshIndexRoute =
     path: '/',
     getParentRoute: () => CampaignsPadandfreshRoute,
   } as any)
+const EventsDetailsSlugRoute = EventsDetailsSlugRouteImport.update({
+  id: '/details/$slug',
+  path: '/details/$slug',
+  getParentRoute: () => EventsRoute,
+} as any)
 const CampaignsPadandfreshPadAGirlRoute =
   CampaignsPadandfreshPadAGirlRouteImport.update({
     id: '/pad-a-girl',
@@ -227,6 +234,11 @@ const CampaignsPadandfreshGuardABoyRoute =
     path: '/guard-a-boy',
     getParentRoute: () => CampaignsPadandfreshRoute,
   } as any)
+const CampaignsDetailsSlugRoute = CampaignsDetailsSlugRouteImport.update({
+  id: '/details/$slug',
+  path: '/details/$slug',
+  getParentRoute: () => CampaignsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -260,8 +272,10 @@ export interface FileRoutesByFullPath {
   '/events/youth-digital-health': typeof EventsYouthDigitalHealthRoute
   '/campaigns/': typeof CampaignsIndexRoute
   '/events/': typeof EventsIndexRoute
+  '/campaigns/details/$slug': typeof CampaignsDetailsSlugRoute
   '/campaigns/padandfresh/guard-a-boy': typeof CampaignsPadandfreshGuardABoyRoute
   '/campaigns/padandfresh/pad-a-girl': typeof CampaignsPadandfreshPadAGirlRoute
+  '/events/details/$slug': typeof EventsDetailsSlugRoute
   '/campaigns/padandfresh/': typeof CampaignsPadandfreshIndexRoute
 }
 export interface FileRoutesByTo {
@@ -293,8 +307,10 @@ export interface FileRoutesByTo {
   '/events/youth-digital-health': typeof EventsYouthDigitalHealthRoute
   '/campaigns': typeof CampaignsIndexRoute
   '/events': typeof EventsIndexRoute
+  '/campaigns/details/$slug': typeof CampaignsDetailsSlugRoute
   '/campaigns/padandfresh/guard-a-boy': typeof CampaignsPadandfreshGuardABoyRoute
   '/campaigns/padandfresh/pad-a-girl': typeof CampaignsPadandfreshPadAGirlRoute
+  '/events/details/$slug': typeof EventsDetailsSlugRoute
   '/campaigns/padandfresh': typeof CampaignsPadandfreshIndexRoute
 }
 export interface FileRoutesById {
@@ -331,8 +347,10 @@ export interface FileRoutesById {
   '/events/youth-digital-health': typeof EventsYouthDigitalHealthRoute
   '/campaigns/': typeof CampaignsIndexRoute
   '/events/': typeof EventsIndexRoute
+  '/campaigns/details/$slug': typeof CampaignsDetailsSlugRoute
   '/campaigns/padandfresh/guard-a-boy': typeof CampaignsPadandfreshGuardABoyRoute
   '/campaigns/padandfresh/pad-a-girl': typeof CampaignsPadandfreshPadAGirlRoute
+  '/events/details/$slug': typeof EventsDetailsSlugRoute
   '/campaigns/padandfresh/': typeof CampaignsPadandfreshIndexRoute
 }
 export interface FileRouteTypes {
@@ -369,8 +387,10 @@ export interface FileRouteTypes {
     | '/events/youth-digital-health'
     | '/campaigns/'
     | '/events/'
+    | '/campaigns/details/$slug'
     | '/campaigns/padandfresh/guard-a-boy'
     | '/campaigns/padandfresh/pad-a-girl'
+    | '/events/details/$slug'
     | '/campaigns/padandfresh/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -402,8 +422,10 @@ export interface FileRouteTypes {
     | '/events/youth-digital-health'
     | '/campaigns'
     | '/events'
+    | '/campaigns/details/$slug'
     | '/campaigns/padandfresh/guard-a-boy'
     | '/campaigns/padandfresh/pad-a-girl'
+    | '/events/details/$slug'
     | '/campaigns/padandfresh'
   id:
     | '__root__'
@@ -439,8 +461,10 @@ export interface FileRouteTypes {
     | '/events/youth-digital-health'
     | '/campaigns/'
     | '/events/'
+    | '/campaigns/details/$slug'
     | '/campaigns/padandfresh/guard-a-boy'
     | '/campaigns/padandfresh/pad-a-girl'
+    | '/events/details/$slug'
     | '/campaigns/padandfresh/'
   fileRoutesById: FileRoutesById
 }
@@ -699,6 +723,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CampaignsPadandfreshIndexRouteImport
       parentRoute: typeof CampaignsPadandfreshRoute
     }
+    '/events/details/$slug': {
+      id: '/events/details/$slug'
+      path: '/details/$slug'
+      fullPath: '/events/details/$slug'
+      preLoaderRoute: typeof EventsDetailsSlugRouteImport
+      parentRoute: typeof EventsRoute
+    }
     '/campaigns/padandfresh/pad-a-girl': {
       id: '/campaigns/padandfresh/pad-a-girl'
       path: '/pad-a-girl'
@@ -712,6 +743,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/campaigns/padandfresh/guard-a-boy'
       preLoaderRoute: typeof CampaignsPadandfreshGuardABoyRouteImport
       parentRoute: typeof CampaignsPadandfreshRoute
+    }
+    '/campaigns/details/$slug': {
+      id: '/campaigns/details/$slug'
+      path: '/details/$slug'
+      fullPath: '/campaigns/details/$slug'
+      preLoaderRoute: typeof CampaignsDetailsSlugRouteImport
+      parentRoute: typeof CampaignsRoute
     }
   }
 }
@@ -748,6 +786,7 @@ interface CampaignsRouteChildren {
   CampaignsWomensHealthRoute: typeof CampaignsWomensHealthRoute
   CampaignsYouthDigitalHealthRoute: typeof CampaignsYouthDigitalHealthRoute
   CampaignsIndexRoute: typeof CampaignsIndexRoute
+  CampaignsDetailsSlugRoute: typeof CampaignsDetailsSlugRoute
 }
 
 const CampaignsRouteChildren: CampaignsRouteChildren = {
@@ -756,6 +795,7 @@ const CampaignsRouteChildren: CampaignsRouteChildren = {
   CampaignsWomensHealthRoute: CampaignsWomensHealthRoute,
   CampaignsYouthDigitalHealthRoute: CampaignsYouthDigitalHealthRoute,
   CampaignsIndexRoute: CampaignsIndexRoute,
+  CampaignsDetailsSlugRoute: CampaignsDetailsSlugRoute,
 }
 
 const CampaignsRouteWithChildren = CampaignsRoute._addFileChildren(
@@ -770,6 +810,7 @@ interface EventsRouteChildren {
   EventsWomensHealthRoute: typeof EventsWomensHealthRoute
   EventsYouthDigitalHealthRoute: typeof EventsYouthDigitalHealthRoute
   EventsIndexRoute: typeof EventsIndexRoute
+  EventsDetailsSlugRoute: typeof EventsDetailsSlugRoute
 }
 
 const EventsRouteChildren: EventsRouteChildren = {
@@ -781,6 +822,7 @@ const EventsRouteChildren: EventsRouteChildren = {
   EventsWomensHealthRoute: EventsWomensHealthRoute,
   EventsYouthDigitalHealthRoute: EventsYouthDigitalHealthRoute,
   EventsIndexRoute: EventsIndexRoute,
+  EventsDetailsSlugRoute: EventsDetailsSlugRoute,
 }
 
 const EventsRouteWithChildren =

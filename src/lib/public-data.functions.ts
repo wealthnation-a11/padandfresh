@@ -11,11 +11,13 @@ function publicClient() {
 }
 export const getPublicContent = createServerFn({ method:'GET' }).handler(async () => {
   const db = publicClient();
-  const [events, campaigns, metrics, content] = await Promise.all([
-    db.from('events').select('id,slug,title,subtitle,summary,category,format,location,venue,date_label,venue_label,starts_at,registration_status,featured').eq('status','published').order('featured',{ ascending:false }),
-    db.from('campaigns').select('slug,title,headline,summary,focus_areas,support_amount,featured').eq('status','published'),
+  const [events, campaigns, metrics, content, speakers, partners] = await Promise.all([
+    db.from('events').select('id,slug,title,subtitle,summary,description,category,format,location,venue,date_label,venue_label,starts_at,ends_at,registration_status,featured,seo_title,seo_description').eq('status','published').order('featured',{ ascending:false }),
+    db.from('campaigns').select('slug,title,headline,summary,focus_areas,support_amount,featured,seo_title,seo_description').eq('status','published'),
     db.from('impact_metrics').select('metric_key,label,value,suffix,metric_type,context,sort_order').eq('is_public',true).order('sort_order'),
     db.from('content_items').select('id,slug,collection,title,summary,format,status,sort_order').in('status',['published','planned']).order('sort_order'),
+    db.from('speakers').select('id,name,role,organization,biography,category').eq('status','published').order('name'),
+    db.from('partners').select('id,name,partnership_type,description,website_url').eq('status','published').order('sort_order'),
   ]);
-  return { events:events.data ?? [], campaigns:campaigns.data ?? [], metrics:metrics.data ?? [], content:content.data ?? [] };
+  return { events:events.data ?? [], campaigns:campaigns.data ?? [], metrics:metrics.data ?? [], content:content.data ?? [], speakers:speakers.data ?? [], partners:partners.data ?? [] };
 });
