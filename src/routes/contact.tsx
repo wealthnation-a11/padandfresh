@@ -1,8 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useState } from 'react';
+import { useServerFn } from '@tanstack/react-start';
 import { z } from 'zod';
 import { Send } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+import { sendContactMessage } from '@/lib/public-submissions.functions';
 import { toast } from 'sonner';
 import { PageIntro, SectionHeading } from '@/components/SectionUI';
 import { Button } from '@/components/ui/button';
