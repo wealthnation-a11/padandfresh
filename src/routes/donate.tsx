@@ -5,7 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { ArrowRight, ArrowLeft, Check, Lock, CreditCard, Smartphone, Building2, Heart } from "lucide-react";
 import { completeDonation } from "@/lib/donations.functions";
 import { createDonation } from "@/lib/public-submissions.functions";
-import { formatNaira, impactCounts } from "@/lib/format";
+import { formatNaira } from "@/lib/format";
 import { toast } from "sonner";
 
 const SearchSchema = z.object({
@@ -51,8 +51,6 @@ function DonatePage() {
   const [anonymous, setAnonymous] = useState(false);
   const [updates, setUpdates] = useState(true);
   const [paying, setPaying] = useState(false);
-
-  const impact = impactCounts(plan);
 
   function next() {
     if (step === 3 && amount < MIN_AMOUNT) return toast.error(`Please enter at least ${formatNaira(MIN_AMOUNT)}.`);

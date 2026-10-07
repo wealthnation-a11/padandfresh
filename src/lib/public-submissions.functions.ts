@@ -102,7 +102,7 @@ export const subscribeToNewsletter = createServerFn({ method: 'POST' })
   });
 
 const donationSchema = z.object({
-  amount: z.number().int().min(100).max(100_000_000),
+  amount: z.number().int().min(100).max(9_999_999_999),
   donation_type: z.enum(['pad_girl', 'fresh_boy', 'both']),
   donor_name: optionalText(120),
   email,
@@ -111,6 +111,9 @@ const donationSchema = z.object({
   display_publicly: z.boolean(),
   is_recurring: z.boolean(),
   receive_updates: z.boolean(),
+}).refine((value) => value.is_anonymous || Boolean(value.donor_name?.trim()), {
+  path: ['donor_name'],
+  message: 'A donor name is required unless the donation is anonymous.',
 });
 
 export const createDonation = createServerFn({ method: 'POST' })
