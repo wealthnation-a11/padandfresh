@@ -1,6 +1,6 @@
 import { createServerFn } from '@tanstack/react-start';
 import { z } from 'zod';
-import { INTERESTS, KADUNA_SLUG, PROFESSIONS } from '@/lib/prescribly-content';
+import { INTERESTS, PROFESSIONS } from '@/lib/prescribly-content';
 
 const email = z.string().trim().email().max(254).transform((value) => value.toLowerCase());
 const optionalText = (max: number) => z.string().trim().max(max).nullable().optional();
@@ -164,6 +164,3 @@ export const sendContactMessage = createServerFn({ method: 'POST' })
     });
     return { ok: !error };
   });
-
-// Used to keep the public Kaduma event registration link as the default form target.
-export const defaultRegistrationEvent = KADUNA_SLUG;
